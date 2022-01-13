@@ -1,0 +1,128 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Image de fond */
+.col-6 .left-part{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+.home{
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+}
+
+.white-logo{
+    position: absolute;
+    width: 320px;
+    z-index: 11;
+}
+
+/* Div de droite */
+.right-part{
+    padding: 36px
+}
+
+h1 {
+    color: rgb(15, 20, 25);
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 84px;
+    letter-spacing: -1.2px;
+    overflow-wrap: break-word;
+    margin: 48px 0;
+}
+
+
+/* Logo Twitter */
+.blue-logo{
+    width: 50px;
+}
+
+h2{
+    margin: 0 0 32px;
+    overflow-wrap: break-word;
+    border: 0 solid black;
+    line-height: 36px;
+    font-size: 31px;
+    font-weight: 700;
+}
+
+/* Bouton  signup */
+.signup{
+    width: 300px;
+    background-color: #1C9CEF;
+    color: white;
+    font-weight: bold;
+    margin: 0 20px 8px 0;
+    cursor: pointer;
+}
+
+/* Règles de confidentialités */
+p{
+    width: 320px;
+    color: rgb(83, 100, 113);
+    line-height: 12px;
+    font-size: 11px;
+    font-weight: 400;
+    margin: 0 0 20px;
+}
+
+.blue{
+    color: #1C9CEF;
+}
+
+/* Contenant login */
+.connexion{
+    margin: 40px 0 0;
+}
+
+/* Vous avez déjà un compte ? */
+h3{
+    overflow-wrap: break-word;
+    color: rgb(15, 20, 25);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 20px;
+    margin: 0 0 20px;
+}
+
+/* Bouton login */
+.login{
+    width: 300px;
+    background-color: white;
+    color: #1C9CEF;
+    font-weight: bold;
+    margin: 0 20px 8px 0;
+    cursor: pointer;
+    transition-property: background-color, box-shadow;
+    transition-duration: 0.2s;
+    border-color: rgb(207, 217, 222);
+    border-width: 1px;
+    border-style: solid;
+}
+
+footer {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 12px 16px;
+}
+
+footer a {
+    overflow-wrap: break-word;
+    color: rgb(83, 100, 113);
+    line-height: 16px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 400;
+    margin: 4px 0;
+    padding: 0px 16px 0px 0px;
+    text-decoration: none;
+}

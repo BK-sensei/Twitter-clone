@@ -1,4 +1,5 @@
 import React from 'react'
+import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Home from './Pages/Home';
@@ -18,7 +19,7 @@ const App = () => {
         <Route path="/:id" element={<UserProfile />} />
         <Route path="/home" element={<UserHome />} />
         <Route path="/tweet/:id" element={<Tweet />} />
-        <Route path='*' element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>
   );

@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+    position: relative;
 }
 /* .home{
     height: 100vh;
@@ -20,10 +21,10 @@
 } */
 
 .white-logo{
-    position: absolute;
+    /* position: absolute; */
     /* top: 180px; */
     width: 350px;
-    z-index: 2;
+    /* z-index: 2; */
 }
 
 /* Div de droite */

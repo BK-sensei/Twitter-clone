@@ -20,8 +20,9 @@
 
 .white-logo{
     position: absolute;
-    width: 320px;
-    z-index: 11;
+    top: 180px;
+    width: 350px;
+    z-index: 2;
 }
 
 /* Div de droite */

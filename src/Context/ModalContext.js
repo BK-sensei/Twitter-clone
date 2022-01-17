@@ -1,8 +1,8 @@
-import React, {createContext, useState} from 'react';
+import React, { createContext, useState } from 'react';
 
 const ModalContext = createContext({})
 
-const ModalContextProvider = (props) => {
+const ModalContextProvider = props => {
     const [visible, setVisible] = useState(false)
     const [modalType, setModalType] = useState(null)
 

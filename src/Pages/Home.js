@@ -1,17 +1,20 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { ModalContext } from '../Context/ModalContext'
 import '../Styles/Home.css'
-import Modal from '../Components/Modal';
+import ModalComponent from '../Components/ModalComponent';
 
 const Home = () => {
 
-    // const { modalType, setModalType } = useContext({ModalContext})
+    const { setModalType, visible, setVisible } = useContext(ModalContext)
 
-    // const handleLogin = () => {
-    //     setModalType("login")
-    // }
-
-    // console.log("modalType", modalType)
+    const handleLogin = () => {
+        setModalType("login")
+        if (visible) {
+            setVisible(false)
+        } else {
+            setVisible(true)
+        }
+    }
 
     return (
         <div className="row">
@@ -46,8 +49,6 @@ const Home = () => {
                 <button 
                     type="button" 
                     className="btn rounded-pill signup" 
-                    data-bs-toggle="modal" 
-                    data-bs-target="#exampleModal"
                 >
                     S'inscire avec un e-mail
                 </button>
@@ -57,13 +58,11 @@ const Home = () => {
                     <button 
                         type="button" 
                         className="btn rounded-pill login" 
-                        data-bs-toggle="modal" 
-                        data-bs-target="##loginModal"
-                        // onClick={handleLogin}
+                        onClick={handleLogin}
                     >
                         Se connecter
                     </button>
-                    <Modal />
+                    <ModalComponent />
                 </div>
 
             </div>

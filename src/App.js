@@ -2,11 +2,11 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import { ModalContextProvider } from './Context/ModalContext';
+import { ModalContextProvider } from './Context/ModalContext'
 
 import Home from './Pages/Home';
 import UserProfile from './Pages/UserProfile'
-import Explorer from './Pages/Exolorer'
+import Explorer from './Pages/Explorer'
 import UserHome from './Pages/UserHome'
 import Tweet from './Pages/Tweet'
 import NotFound from './Pages/NotFound';

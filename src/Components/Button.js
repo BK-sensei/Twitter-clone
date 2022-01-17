@@ -4,7 +4,6 @@ import styled from 'styled-components'
 
 const ButtonStyled = styled.div`
   width: 300px;
-
 `
 
 const Button = props => {

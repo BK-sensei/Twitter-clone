@@ -13,7 +13,10 @@ const customStyles = {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
-      zindex: 20
+      zIndex: 20,
+      width: '500px',
+      borderRadius: '10px',
+      position: 'absolute'
     }
   }
 
@@ -42,11 +45,11 @@ const ModalComponent = () => {
                 >
                     X
                 </button>
-                <div className='row d-flex '>
+
                     {modalType === "login" && 
                         <Login />
                     }
-                </div>
+
             </Modal>
         </>
 

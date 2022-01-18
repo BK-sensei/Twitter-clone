@@ -1,7 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { useFormik } from 'formik'
+
 import Button from './Button'
+import { useNavigate } from 'react-router-dom'
 
 const LoginLogo = styled.div`
     width: 50px;
@@ -13,6 +16,35 @@ const Separator = styled.div`
 `
 
 const Login = () => {
+    const navigate = useNavigate()
+
+    const formik = useFormik({
+        initialValues:{
+            username: "String",
+            password: "password"
+        },
+        onSubmit: values => {
+            login(values)
+        }
+    })
+    const login = async values => {
+        const response = await fetch('http://localhost:5000/auth/login', {
+          method: 'post',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          credentials: 'include',
+          body: JSON.stringify(values)
+        })
+    
+        if (response.status >= 400) {
+          alert(response.statusText)
+        } else {
+          navigate('/home')
+        }
+    }
+
+    // console.log(formik.values)
     return (
         <>
             <div className='row d-flex my-1'>
@@ -24,13 +56,13 @@ const Login = () => {
             </div>
             <div className='row d-flex my-3'>
                 <div className='col-12 d-flex justify-content-center'>
-                    <Button text="Se connecter avec Google"/>
-                    
+                    <Button text="Se connecter avec Google" />
+
                 </div>
             </div>
             <div className='row d-flex my-3'>
                 <div className='col-12 d-flex justify-content-center'>
-                    <Button text="Se connecter avec Apple"/>
+                    <Button text="Se connecter avec Apple" />
                 </div>
             </div>
             <div className='row d-flex my-3 d-flex justify-content-center'>
@@ -46,23 +78,56 @@ const Login = () => {
                     </div>
                 </div>
             </div>
-            <div className='row d-flex my-3'>
-                <div className='col-12'>
-                    <div className="input-group input-group-lg">
-                        <input type="text" className="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg"/>
+            <form onSubmit={formik.handleSubmit}>
+                <div className='row d-flex my-3'>
+                    <div className='col-12'>
+                        <div className="input-group input-group-lg">
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="username"
+                                name="username"
+                                placeholder="Username"
+                                onChange={formik.handleChange}
+                                value={formik.values.username}
+                            />
+                            {formik.errors.username}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div className='row d-flex my-3'>
-                <div className='col-12'>
-                    <div className='col-12 d-flex justify-content-center'>
-                        <button type="button" className="btn rounded-pill btn-dark" style={{width: "330px"}}>Suivant</button>
+                <div className='row d-flex my-3'>
+                    <div className='col-12'>
+                        <div className="input-group input-group-lg">
+                            <input 
+                                type="text" 
+                                className="form-control" 
+                                id="password"
+                                name="password"
+                                placeholder="Password"
+                                onChange={formik.handleChange}
+                                value={formik.values.password}
+                            />
+                            {formik.errors.password}
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div className='row d-flex my-3'>
+                    <div className='col-12'>
+                        <div className='col-12 d-flex justify-content-center'>
+                            <button 
+                                type="submit" 
+                                className="btn rounded-pill btn-dark" 
+                                style={{ width: "330px" }}
+                            >
+                                Suivant
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
             <div className='row d-flex my-3'>
                 <div className='col-12 d-flex justify-content-center'>
-                    <Button text="Mot de passe oublié?"/>
+                    <Button text="Mot de passe oublié?" />
                 </div>
             </div>
             <div className='row d-flex my-3'>

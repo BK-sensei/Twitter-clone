@@ -7,8 +7,8 @@ const Home = () => {
 
     const { setModalType, visible, setVisible } = useContext(ModalContext)
 
-    const handleLogin = () => {
-        setModalType("login")
+    const handleModal = (modalType) => {
+        setModalType(modalType)
         if (visible) {
             setVisible(false)
         } else {
@@ -52,6 +52,7 @@ const Home = () => {
                 <button 
                     type="button" 
                     className="btn rounded-pill signup" 
+                    onClick={() => handleModal("signup")}
                 >
                     S'inscire avec un e-mail
                 </button>
@@ -61,7 +62,7 @@ const Home = () => {
                     <button 
                         type="button" 
                         className="btn rounded-pill login" 
-                        onClick={handleLogin}
+                        onClick={() => handleModal("login")}
                     >
                         Se connecter
                     </button>

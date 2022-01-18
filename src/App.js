@@ -26,7 +26,7 @@ const App = () => {
         </Routes>
       </BrowserRouter>
     </ModalContextProvider>
-  );
-};
+  )
+}
 
 export default App;

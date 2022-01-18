@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import { ModalContext } from '../Context/ModalContext'
 
 import Login from './Login'
+import Signup from './Signup'
 
 const customStyles = {
     content: {
@@ -37,6 +38,7 @@ const ModalComponent = () => {
             <Modal 
                 isOpen={visible}
                 style={customStyles}
+                ariaHideApp={false}
             >
                 <button
                     type="button"
@@ -48,6 +50,9 @@ const ModalComponent = () => {
 
                     {modalType === "login" && 
                         <Login />
+                    }
+                    {modalType === "signup" && 
+                        <Signup />
                     }
 
             </Modal>

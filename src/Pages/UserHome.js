@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import styled from 'styled-components'
 import Navbar from '../Components/Navbar'
+
+import { UserContext } from '../Context/UserContext'
 
 const Left = styled.div`
     width: 30%;
@@ -14,6 +16,9 @@ const Right = styled.div`
 `
 
 const UserHome = () => {
+    const { user } = useContext(UserContext)
+
+    console.log(user)
     return (
         <div className='d-flex'>
             <Left>

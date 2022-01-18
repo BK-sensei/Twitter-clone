@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 
 import { useFormik } from 'formik'
+import { UserContext } from '../Context/UserContext'
 
 import Button from './Button'
 import { useNavigate } from 'react-router-dom'
@@ -17,6 +18,7 @@ const Separator = styled.div`
 
 const Login = () => {
     const navigate = useNavigate()
+    const { setUser } = useContext(UserContext)
 
     const formik = useFormik({
         initialValues:{
@@ -40,11 +42,13 @@ const Login = () => {
         if (response.status >= 400) {
           alert(response.statusText)
         } else {
-          navigate('/home')
+            const data = await response.json()
+            setUser(data)
+            navigate('/home')
         }
     }
 
-    // console.log(formik.values)
+    // console.log(user)
     return (
         <>
             <div className='row d-flex my-1'>

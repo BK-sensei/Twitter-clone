@@ -3,11 +3,11 @@ import React from 'react'
 import styled from 'styled-components'
 
 const ButtonStyled = styled.div`
-  width: 300px;
+  width: ${props => props.width};
 `
 
 const Button = props => {
-  const { text } = props
+  const { text, width } = props
 
   return (
     <div>
@@ -15,7 +15,7 @@ const Button = props => {
           type="button" 
           className="btn rounded-pill btn-outline-secondary"
         >
-          <ButtonStyled>
+          <ButtonStyled width={`${width}`}>
             {text}
           </ButtonStyled>
         </button>

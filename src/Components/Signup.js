@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 import styled from 'styled-components'
+import { date } from 'yup/lib/locale'
+import { UserContext } from '../Context/UserContext'
 
 const SignupTitle = styled.h2`
   font-weight: normal;
+  margin: 0;
 `
 const Birthday = styled.p`
   font-weight: normal;
@@ -12,8 +19,96 @@ const Birthday = styled.p`
 const InfoBirthday = styled.div`
   font-size: 10px;
 `
+const ErrorForm = styled.div`
+    color: red;
+    font-weight: bold;
+    display: block;
+`
 
 const Signup = () => {
+  const navigate = useNavigate()
+  const { setUser } = useContext(UserContext)
+  const [errorSignup, setErrorSignup] = useState(null)
+
+  const formik = useFormik({
+    initialValues: {
+      name: "bob",
+      username: "bobby",
+      password: "bobbybobby",
+      passwordConfirmation: "bobbybobby",
+      email: "bobby@bobby.bobby",
+      birthday: date
+    },
+    onSubmit: values => {
+      signup(values)
+    },
+    validateOnChange: false,
+    validationSchema: Yup.object({
+      name: Yup.string()
+        .required("Name is required"),
+      username: Yup.string()
+        .required("Username is required"),
+      password: Yup.string()
+        .required("Password is required")
+        .min(8, "Password is too short"),
+      passwordConfirmation: Yup.string()
+        .oneOf([Yup.ref('password'), null], 'Passwords must match'),
+      email: Yup.string()
+        .required("Email is required")
+        .email("Email invalid"),
+      birthday: Yup.string()
+        .required("Birthday is required")
+        // .birthday("Test")
+    })
+  })
+
+  const signup = async values => {
+    // fetch signup
+    const signupResponse = await fetch('http://localhost:5000/users', {
+      method: 'post',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        name: values.name,
+        username: values.username,
+        password: values.password,
+        email: values.email,
+        birthday: values.birthday
+      })
+    })
+
+    const user = await signupResponse.json()
+
+    if (user.error) {
+      setErrorSignup(user.error)
+      return
+    }
+
+    // fetch login
+    const loginResponse = await fetch('http://localhost:5000/auth/login', {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        username: user.username,
+        password: user.password
+      })
+    })
+
+    if (loginResponse.status >= 400) {
+      alert(loginResponse.statusText)
+    } else {
+      const data = await loginResponse.json()
+      setUser(data)
+      navigate('/home')
+    }
+  }
+
+  // console.log(formik.values)
   return (
   <>
     <div className='row d-flex my-1'>
@@ -25,75 +120,122 @@ const Signup = () => {
       <SignupTitle>
         Créer votre compte
       </SignupTitle>
-      <div className='col-12 mb-2'>
+      <ErrorForm>
+          {errorSignup && errorSignup}
+      </ErrorForm>
+      <form onSubmit={formik.handleSubmit}>
+        {/* name */}
+        <div className='col-12 mb-2'>
+            <div className="input-group input-group-lg">
+                <input 
+                  type="text" 
+                  className="form-control" 
+                  placeholder="Nom et prénom"
+                  name='name'
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                />
+            </div>
+            <ErrorForm>
+                {formik.errors.name}
+            </ErrorForm>
+        </div>
+        {/* username */}
+        <div className='col-12 my-2'>
           <div className="input-group input-group-lg">
               <input 
                 type="text" 
                 className="form-control" 
-                placeholder="Nom et prénom"
+                placeholder="Username"
+                name='username'
+                value={formik.values.username}
+                onChange={formik.handleChange}
               />
           </div>
-      </div>
-      <div className='col-12 my-2'>
-        <div className="input-group input-group-lg">
-            <input 
-              type="text" 
-              className="form-control" 
-              placeholder="Username"
-            />
+          <ErrorForm>
+              {formik.errors.username}
+          </ErrorForm>
         </div>
-      </div>
-      <div className='col-12 my-2'>
-        <div className="input-group input-group-lg">
-            <input 
-              type="text" 
-              className="form-control" 
-              placeholder="Email"
-            />
+        {/* Email */}
+        <div className='col-12 my-2'>
+          <div className="input-group input-group-lg">
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Email"
+                name='email'
+                value={formik.values.email}
+                onChange={formik.handleChange}
+              />
+          </div>
+          <ErrorForm>
+              {formik.errors.email}
+          </ErrorForm>
         </div>
-      </div>
-      <div className='col-12 my-2'>
-        <div className="input-group input-group-lg">
-            <input 
-              type="text" 
-              className="form-control" 
-              placeholder="Mot de passe"
-            />
+        {/* Password */}
+        <div className='col-12 my-2'>
+          <div className="input-group input-group-lg">
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Mot de passe"
+                name='password'
+                value={formik.values.password}
+                onChange={formik.handleChange}
+              />
+          </div>
+          <ErrorForm>
+              {formik.errors.password}
+          </ErrorForm>
         </div>
-      </div>
-      <div className='col-12 my-2'>
-        <div className="input-group input-group-lg">
-            <input 
-              type="text" 
-              className="form-control" 
-              placeholder="Confirmer votre mot de passe"
-            />
+        {/* {Confirm Password} */}
+        <div className='col-12 my-2'>
+          <div className="input-group input-group-lg">
+              <input 
+                type="text" 
+                className="form-control" 
+                placeholder="Confirmer votre mot de passe"
+                name='passwordConfirmation'
+                value={formik.values.passwordConfirmation}
+                onChange={formik.handleChange}
+              />
+          </div>
+          <ErrorForm>
+              {formik.errors.passwordConfirmation}
+          </ErrorForm>
         </div>
-      </div>
-      <div className='col-12 my-2'>
-        <Birthday>
-          Date de naissance
-        </Birthday>
-        <InfoBirthday>
-          Cette information ne sera pas affichée publiquement. Confirmez votre âge, même si ce compte est pour une entreprise, un animal de compagnie ou autre chose.
-        </InfoBirthday>
-      </div>
-      <div className='col-12'>
-        <input 
-          type="date" 
-          className="form-control" 
-          placeholder=""
-        />
-      </div>
-      <div className='col-12 my-3'>
-        <button 
-            type="submit" 
-            className="btn rounded-pill btn-dark" 
-            style={{ width: "460px" }}
-        >
-            Suivant
-        </button>
-      </div>
+        {/* Birthday */}
+        <div className='col-12 my-2'>
+          <Birthday>
+            Date de naissance
+          </Birthday>
+          <InfoBirthday>
+            Cette information ne sera pas affichée publiquement. Confirmez votre âge, même si ce compte est pour une entreprise, un animal de compagnie ou autre chose.
+          </InfoBirthday>
+        </div>
+        <div className='col-12'>
+          <input 
+            type="date" 
+            className="form-control" 
+            name='birthday'
+            value={formik.values.birthday}
+            onChange={formik.handleChange}
+          />
+          <ErrorForm>
+              {formik.errors.birthday}
+          </ErrorForm>
+        </div>
+        {/* Submit */}
+        <div className='col-12 my-3'>
+          <button 
+              type="submit" 
+              className="btn rounded-pill btn-dark" 
+              style={{ width: "460px" }}
+          >
+              Suivant
+          </button>
+        </div>
+      </form>
     </div>
   </>
   )

@@ -1,11 +1,13 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+
 import styled from 'styled-components'
 
 import { useFormik } from 'formik'
-import { UserContext } from '../Context/UserContext'
+import * as Yup from 'yup'
 
+import { UserContext } from '../Context/UserContext'
 import Button from './Button'
-import { useNavigate } from 'react-router-dom'
 
 const LoginLogo = styled.div`
     width: 50px;
@@ -15,19 +17,32 @@ const Separator = styled.div`
     border-top: 1px solid rgb(207, 217, 222);
     width: 100%;
 `
+const ErrorForm = styled.div`
+    color: red;
+    font-weight: bold;
+    display: block;
+`
 
 const Login = () => {
     const navigate = useNavigate()
     const { setUser } = useContext(UserContext)
+    const [errorLogin, setErrorLogin] = useState(null)
 
     const formik = useFormik({
         initialValues:{
-            username: "String",
+            username: "Zatana",
             password: "password"
         },
         onSubmit: values => {
             login(values)
-        }
+        },
+        validateOnChange: false,
+        validationSchema: Yup.object({
+          username: Yup.string()
+            .required("Username is required"),
+          password: Yup.string()
+            .required("Password is required")
+        })
     })
     const login = async values => {
         const response = await fetch('http://localhost:5000/auth/login', {
@@ -40,7 +55,8 @@ const Login = () => {
         })
     
         if (response.status >= 400) {
-          alert(response.statusText)
+        //   alert(response.statusText)
+            setErrorLogin("Username/Password is incorrect.")
         } else {
             const data = await response.json()
             setUser(data)
@@ -48,7 +64,7 @@ const Login = () => {
         }
     }
 
-    // console.log(user)
+    // console.log(formik.errors)
     return (
         <>
             <div className='row d-flex my-1'>
@@ -60,13 +76,13 @@ const Login = () => {
             </div>
             <div className='row d-flex my-3'>
                 <div className='col-12 d-flex justify-content-center'>
-                    <Button text="Se connecter avec Google" />
+                    <Button text="Se connecter avec Google" width="300px"/>
 
                 </div>
             </div>
             <div className='row d-flex my-3'>
                 <div className='col-12 d-flex justify-content-center'>
-                    <Button text="Se connecter avec Apple" />
+                    <Button text="Se connecter avec Apple" width="300px"/>
                 </div>
             </div>
             <div className='row d-flex my-3 d-flex justify-content-center'>
@@ -84,8 +100,11 @@ const Login = () => {
             </div>
             <form onSubmit={formik.handleSubmit}>
                 <div className='row d-flex my-3'>
-                    <div className='col-12'>
-                        <div className="input-group input-group-lg">
+                    <div className='col-12 d-flex flex-column align-items-center'>
+                        <ErrorForm>
+                            {errorLogin && errorLogin}
+                        </ErrorForm>
+                        <div className="input-group input-group-lg" style={{width: "320px"}}>
                             <input 
                                 type="text" 
                                 className="form-control" 
@@ -95,13 +114,15 @@ const Login = () => {
                                 onChange={formik.handleChange}
                                 value={formik.values.username}
                             />
-                            {formik.errors.username}
                         </div>
+                        <ErrorForm>
+                            {formik.errors.username}
+                        </ErrorForm>
                     </div>
                 </div>
                 <div className='row d-flex my-3'>
-                    <div className='col-12'>
-                        <div className="input-group input-group-lg">
+                    <div className='col-12 d-flex flex-column align-items-center'>
+                        <div className="input-group input-group-lg" style={{width: "320px"}}>
                             <input 
                                 type="text" 
                                 className="form-control" 
@@ -111,8 +132,10 @@ const Login = () => {
                                 onChange={formik.handleChange}
                                 value={formik.values.password}
                             />
-                            {formik.errors.password}
                         </div>
+                        <ErrorForm>
+                            {formik.errors.password}
+                        </ErrorForm>
                     </div>
                 </div>
                 <div className='row d-flex my-3'>
@@ -131,7 +154,7 @@ const Login = () => {
             </form>
             <div className='row d-flex my-3'>
                 <div className='col-12 d-flex justify-content-center'>
-                    <Button text="Mot de passe oublié?" />
+                    <Button text="Mot de passe oublié?" width="300px"/>
                 </div>
             </div>
             <div className='row d-flex my-3'>

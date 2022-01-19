@@ -21,7 +21,7 @@ const App = () => {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/explorer" element={<Explorer />} />
-            <Route path="/:id" element={<UserProfile />} />
+            <Route path="/user/:id" element={<UserProfile />} />
             <Route path="/home" element={<UserHome />} />
             <Route path="/tweet/:id" element={<Tweet />} />
             <Route path="*" element={<NotFound />} />

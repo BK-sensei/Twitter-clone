@@ -1,35 +1,24 @@
 import React, { useContext } from 'react'
 
-import styled from 'styled-components'
 import Navbar from '../Components/Navbar'
 
 import { UserContext } from '../Context/UserContext'
-
-const Left = styled.div`
-    width: 30%;
-`
-const Middle = styled.div`
-    width: 40%;
-`
-const Right = styled.div`
-    width: 30%
-`
 
 const UserHome = () => {
     const { user } = useContext(UserContext)
 
     console.log(user)
     return (
-        <div className='d-flex'>
-            <Left>
+        <div className='row'>
+            <div className='col-3 p-5 border-end'>
                 <Navbar />
-            </Left>
-            <Middle>
-                Middle
-            </Middle>
-            <Right>
-                Right
-            </Right>
+            </div>
+            <div className='col-6'>
+                middle
+            </div>
+            <div className='col-3'>
+                right
+            </div>
         </div>
     )
 }

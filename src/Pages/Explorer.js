@@ -34,6 +34,7 @@ const Explorer = () => {
             {tweets.map(element => (
                 <Tweet 
                     key={element._id}
+                    id={element._id}
                     name={element.user.name}
                     username={element.user.username}
                     createdAt={element.createdAt}

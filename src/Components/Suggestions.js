@@ -28,7 +28,7 @@ const Suggestions = () => {
       return <h1>Chargement...</h1>
   }
 
-  console.log(users)
+  // console.log(users)
   return (
     <div>
       {users.map(element => (

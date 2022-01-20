@@ -1,16 +1,26 @@
-// import React, { useEffect } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import moment from "moment"
 import 'moment/locale/fr'
 import "../Styles/Components/ProfileContent.css"
 
-import { useContext } from 'react';
 import { UserContext } from '../Context/UserContext';
+import { ModalContext } from '../Context/ModalContext';
 
 const ProfileContent = () => {
     const { user } = useContext(UserContext)
+    const { setModalType, visible, setVisible } = useContext(ModalContext)
 
     moment.locale("fr")
+
+    const handleModal = (modalType) => {
+        setModalType(modalType)
+        if (visible) {
+            setVisible(false)
+        } else {
+            setVisible(true)
+        }
+    }
 
     // console.log('followings', user.followings.length);
     return (
@@ -37,7 +47,12 @@ const ProfileContent = () => {
                 <div className='profile'>
                     <div className='edit'>
                         <img src="https://i.pinimg.com/564x/7e/f2/c3/7ef2c3686d046a856ee66b26145e77b6.jpg" class="rounded-circle profile-picture" alt="..." />
-                        <button type="button" class="btn rounded-pill edit-btn">Éditer le profil</button>
+                        <button 
+                            type="button" 
+                            class="btn rounded-pill edit-btn"
+                            onClick={() => handleModal("editProfile")}
+                        >Éditer le profil
+                        </button>
                     </div>
 
                     <div className='name-username'>

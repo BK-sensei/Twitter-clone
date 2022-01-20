@@ -1,8 +1,23 @@
 import React, { useContext } from 'react'
 
+import styled from 'styled-components'
+
 import Menu from '../Components/Menu'
+import Tweeter from '../Components/Tweeter'
 
 import { UserContext } from '../Context/UserContext'
+
+const Top = styled.div` 
+  width: 100%;
+  height: 53px;
+  padding: 0px 16px;
+  display: flex;
+  align-items: center;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+`
 
 const UserHome = () => {
     const { user } = useContext(UserContext)
@@ -14,7 +29,10 @@ const UserHome = () => {
                 <Menu />
             </div>
             <div className='col-6'>
-                middle
+                <Top>
+                    Home
+                </Top>
+                <Tweeter />
             </div>
             <div className='col-3 p-5 border-start'>
                 right

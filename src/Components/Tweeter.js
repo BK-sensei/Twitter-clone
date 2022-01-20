@@ -5,7 +5,7 @@ import styled from 'styled-components'
 const Tweeting = styled.div`
   display: flex;
   justify-content: end;
-  margin: 10px 0 0 0;
+  margin: 15px 0 0 0;
 `
 
 const Tweeter = () => {

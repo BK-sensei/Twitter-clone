@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { ModalContext } from '../Context/ModalContext'
 
 import ModalComponent from '../Components/ModalComponent'
@@ -17,6 +17,7 @@ const LoginLogo = styled.div`
     margin-left: 20px;
 `
 const Menu = () => {
+  const navigate = useNavigate()
   const { user } = useContext(UserContext)
   const { setModalType, visible, setVisible } = useContext(ModalContext)
 
@@ -27,6 +28,16 @@ const Menu = () => {
     } else {
         setVisible(true)
     }
+  }
+
+  const handleLogoutClick = () => {
+    fetch('http://localhost:5000/auth/logout', {
+      method: 'delete',
+      credentials: 'include'
+    })
+      .then(response => {
+        navigate('/')
+      })
   }
 
   console.log(user)
@@ -66,6 +77,7 @@ const Menu = () => {
         <button 
           type="button" 
           className="btn mt-auto mb-0 rounded-pill btn-primary"
+          onClick={handleLogoutClick}
         >
           Logout
         </button>

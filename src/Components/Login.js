@@ -32,7 +32,7 @@ const Login = () => {
 
     const formik = useFormik({
         initialValues:{
-            username: "Zatana",
+            username: "zatathegoat",
             password: "password"
         },
         onSubmit: values => {
@@ -116,7 +116,7 @@ const Login = () => {
                                 placeholder="Username"
                                 onChange={formik.handleChange}
                                 value={formik.values.username}
-                            />
+                            />  
                         </div>
                         <ErrorForm>
                             {formik.errors.username}

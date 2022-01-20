@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
 
@@ -36,7 +37,7 @@ const FooterZone = styled.a`
 `
 
 const Tweet = (props) => {
-  const { id, name, username, createdAt, text, numRetweets, numComments } = props
+  const { id, name, username, userid, createdAt, text, numRetweets, numComments } = props
 
   const handleRetweet = (id) => {
     // async () =>{
@@ -63,7 +64,10 @@ const Tweet = (props) => {
       </div>
       <div className='col-10'>
         <Header>
-          <h6>{name}</h6> @{username} · {createdAt}
+          <Link to={`/user/${userid}`}>
+            <h6>{name}</h6> 
+          </Link>
+          @{username} · {createdAt}
         </Header>
         <Middle>
           {text}

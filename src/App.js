@@ -5,12 +5,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { ModalContextProvider } from './Context/ModalContext'
 import { UserContextProvider } from './Context/UserContext'
 
-import Home from './Pages/Home';
+import Home from './Pages/Home'
 import UserProfile from './Pages/UserProfile'
 import Explorer from './Pages/Explorer'
 import UserHome from './Pages/UserHome'
 import Tweet from './Pages/Tweet'
-import NotFound from './Pages/NotFound';
+import NotFound from './Pages/NotFound'
 
 
 const App = () => {

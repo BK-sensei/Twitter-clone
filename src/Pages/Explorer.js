@@ -41,6 +41,7 @@ const Explorer = () => {
                     <Tweet 
                         key={element._id}
                         id={element._id}
+                        userid={element.user._id}
                         name={element.user.name}
                         username={element.user.username}
                         createdAt={element.createdAt}

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 
 import Tweet from '../Components/Tweet'
 import Menu from '../Components/Menu'
+import Suggestions from '../Components/Suggestions'
 
 const Explorer = () => {
     const [tweets, setTweets] = useState()
@@ -49,8 +50,8 @@ const Explorer = () => {
                 />
             ))}
             </div>
-            <div className='col-3 p-5 border-start'>
-                right
+            <div className='col-3 p-4 border-start'>
+                <Suggestions />
             </div>
         </div>
     )

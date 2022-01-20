@@ -1,6 +1,8 @@
 import React from 'react'
-import ProfileContent from '../Components/ProfileContent';
-import Menu from '../Components/Menu';
+
+import ProfileContent from '../Components/ProfileContent'
+import Menu from '../Components/Menu'
+import Suggestions from '../Components/Suggestions'
 
 const UserProfile = () => {
     return (
@@ -12,8 +14,8 @@ const UserProfile = () => {
                 <div className='col-6 p-0'>
                     <ProfileContent />
                 </div>
-                <div className='col-3 border-start'>
-                    suggestion
+                <div className='col-3 p-4 border-start'>
+                    <Suggestions />
                 </div>
             </div>
         </>

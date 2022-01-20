@@ -35,6 +35,7 @@ const Suggestions = () => {
         <UserCard 
           key={element._id}
           name={element.name}
+          username={element.username}
         />
       ))}
     </div>

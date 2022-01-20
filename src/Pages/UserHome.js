@@ -35,7 +35,7 @@ const UserHome = () => {
                 </Top>
                 <Tweeter />
             </div>
-            <div className='col-3 p-5 border-start'>
+            <div className='col-3 p-4 border-start'>
                 <Suggestions />
             </div>
         </div>

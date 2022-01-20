@@ -36,16 +36,16 @@ const Tweet = (props) => {
   const { id, name, username, createdAt, text, numRetweets, numComments } = props
 
   const handleRetweet = (id) => {
-    async () =>{
+    // async () =>{
 
-      await fetch(`http://localhost:5000/tweets/${id}`, {
-        method:'put',
-        credentials: "include",
-        body: JSON.stringify(user._id)
-        //à finir
-      })
+    //   await fetch(`http://localhost:5000/tweets/${id}`, {
+    //     method:'put',
+    //     credentials: "include",
+    //     body: JSON.stringify(user._id)
+        
+    //   })
 
-    }
+    // }
   }
 
   // console.log(createdAt)

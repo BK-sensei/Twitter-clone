@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Tweet from '../Components/Tweet'
+import Menu from '../Components/Menu'
 
 const Explorer = () => {
     const [tweets, setTweets] = useState()
@@ -30,7 +31,11 @@ const Explorer = () => {
 
     console.log(tweets)
     return (
-        <div>
+        <div className='row'>
+            <div className='col-3 border-end p-4 d-flex flex-column' style={{height: "100vh"}}>
+                <Menu />
+            </div>
+            <div className='col-6'>
             {tweets.map(element => (
                 <Tweet 
                     key={element._id}
@@ -43,6 +48,10 @@ const Explorer = () => {
                     numComments={element.comments.length}
                 />
             ))}
+            </div>
+            <div className='col-3 p-5 border-start'>
+                right
+            </div>
         </div>
     )
 }

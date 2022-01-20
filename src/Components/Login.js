@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
+import { ModalContext } from '../Context/ModalContext'
 import { UserContext } from '../Context/UserContext'
 import Button from './Button'
 
@@ -25,6 +26,8 @@ const ErrorForm = styled.div`
 const Login = () => {
     const navigate = useNavigate()
     const { setUser } = useContext(UserContext)
+    const { setVisible } = useContext(ModalContext)
+
     const [errorLogin, setErrorLogin] = useState(null)
 
     const formik = useFormik({
@@ -34,6 +37,7 @@ const Login = () => {
         },
         onSubmit: values => {
             login(values)
+            setVisible(false)
         },
         validateOnChange: false,
         validationSchema: Yup.object({

@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { ModalContext } from '../Context/ModalContext'
 
 import '../Styles/Home.css'
-import ModalComponent from '../Components/ModalComponent';
+import ModalComponent from '../Components/ModalComponent'
 
 const Home = () => {
 

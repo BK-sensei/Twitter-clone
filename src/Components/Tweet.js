@@ -21,6 +21,7 @@ const FooterIcon = styled.div`
 `
 const FooterNum = styled.div`
   width: 50px;
+  color: black;
 `
 const FooterZone = styled.a`
   text-decoration: none;
@@ -51,10 +52,13 @@ const Tweet = (props) => {
   // console.log(createdAt)
   return (
     <div className='row d-flex border-bottom py-2'>
-      <div className='col-1'>
-        <img src='../Images/default_profile_400x400.png' />
+      <div className='col-2'>
+          <img 
+            className='img-fluid rounded-circle'
+            // style={{width: '50%'}}
+            src='https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png' />
       </div>
-      <div className='col-11'>
+      <div className='col-10'>
         <Header>
           <h6>{name}</h6> @{username} · {createdAt}
         </Header>

@@ -32,7 +32,7 @@ const Tweeter = () => {
           <Tweeting>
             <button 
               type="button" 
-              class="btn rounded-pill btn-primary"
+              className="btn rounded-pill btn-primary"
               style={{width: "80px"}}
             >
               Tweet

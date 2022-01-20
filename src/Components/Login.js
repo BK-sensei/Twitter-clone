@@ -32,7 +32,7 @@ const Login = () => {
 
     const formik = useFormik({
         initialValues:{
-            username: "Zatana",
+            username: "zatathegoat",
             password: "password"
         },
         onSubmit: values => {

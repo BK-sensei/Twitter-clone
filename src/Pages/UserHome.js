@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Menu from '../Components/Menu'
 import Tweeter from '../Components/Tweeter'
+import Suggestions from '../Components/Suggestions'
 
 import { UserContext } from '../Context/UserContext'
 
@@ -35,7 +36,7 @@ const UserHome = () => {
                 <Tweeter />
             </div>
             <div className='col-3 p-5 border-start'>
-                right
+                <Suggestions />
             </div>
         </div>
     )

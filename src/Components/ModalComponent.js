@@ -5,6 +5,7 @@ import { ModalContext } from '../Context/ModalContext'
 
 import Login from './Login'
 import Signup from './Signup'
+import Tweeter from './Tweeter'
 
 const customStyles = {
     content: {
@@ -53,6 +54,9 @@ const ModalComponent = () => {
                     }
                     {modalType === "signup" && 
                         <Signup />
+                    }
+                    {modalType === "tweet" && 
+                        <Tweeter />
                     }
 
             </Modal>

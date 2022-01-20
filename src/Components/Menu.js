@@ -1,6 +1,8 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { ModalContext } from '../Context/ModalContext'
 
+import ModalComponent from '../Components/ModalComponent'
 import styled from 'styled-components'
 
 import { UserContext } from '../Context/UserContext'
@@ -16,6 +18,16 @@ const LoginLogo = styled.div`
 `
 const Menu = () => {
   const { user } = useContext(UserContext)
+  const { setModalType, visible, setVisible } = useContext(ModalContext)
+
+  const handleModal = (modalType) => {
+    setModalType(modalType)
+    if (visible) {
+        setVisible(false)
+    } else {
+        setVisible(true)
+    }
+  }
 
   console.log(user)
   return (
@@ -44,13 +56,20 @@ const Menu = () => {
           </Link>
         </nav>
       <div className='d-flex flex-column justify-content-between' style={{height: "65vh"}} >
-        <button type="button" className="btn rounded-pill btn-primary">Tweet</button>
+        <button 
+          type="button" 
+          className="btn rounded-pill btn-primary"
+          onClick={() => handleModal("tweet")}
+        >
+          Tweet
+        </button>
         <button 
           type="button" 
           className="btn mt-auto mb-0 rounded-pill btn-primary"
         >
           Logout
         </button>
+        <ModalComponent />
       </div>
     </div>
   )

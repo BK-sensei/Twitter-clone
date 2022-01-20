@@ -26,7 +26,7 @@ const UserHome = () => {
     console.log(user)
     return (
         <div className='row'>
-            <div className='col-3 border-end p-4 d-flex flex-column' style={{height: "100%"}}>
+            <div className='col-3 border-end p-4 d-flex flex-column' >
                 <Menu />
             </div>
             <div className='col-6'>

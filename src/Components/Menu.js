@@ -40,7 +40,7 @@ const Menu = () => {
       })
   }
 
-  console.log(user)
+  // console.log(user)
   return (
     <div className='sticky-top' >
         <LoginLogo>

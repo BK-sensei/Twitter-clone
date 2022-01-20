@@ -11,6 +11,7 @@ const UserCard = (props) => {
         <img 
             className='img-fluid rounded-circle ms-3'
             style={{width: '20%', height: '50px'}}
+            alt='default_profile'
             src='https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png' 
         />
         <div className="card-body">

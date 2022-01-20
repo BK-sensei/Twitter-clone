@@ -58,6 +58,7 @@ const Tweet = (props) => {
       <div className='col-2'>
           <img 
             className='img-fluid rounded-circle'
+            alt='default_profile'
             // style={{width: '50%'}}
             src='https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png' 
           />

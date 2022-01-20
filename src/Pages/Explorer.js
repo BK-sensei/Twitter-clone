@@ -30,7 +30,7 @@ const Explorer = () => {
         return <h1>Chargement...</h1>
     }
 
-    console.log(tweets)
+    // console.log(tweets)
     return (
         <div className='row'>
             <div className='col-3 border-end p-4 d-flex flex-column'>

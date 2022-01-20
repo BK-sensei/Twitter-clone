@@ -7,7 +7,7 @@ const Feed = () => {
   const [feed, setFeed] = useState()
   const navigate = useNavigate()
 
-    useEffect(() => {
+  useEffect(() => {
       getFeed()
   },[])
 
@@ -35,6 +35,7 @@ const Feed = () => {
         <Tweet 
             key={element._id}
             id={element._id}
+            userid={element.user._id}
             name={element.user.name}
             username={element.user.username}
             createdAt={element.createdAt}

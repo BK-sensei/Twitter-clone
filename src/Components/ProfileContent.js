@@ -1,15 +1,40 @@
-import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import React, { useContext, useState, useEffect } from 'react'
+import { Link, useNavigate, useParams } from 'react-router-dom'
+
 import moment from "moment"
 import 'moment/locale/fr'
 import "../Styles/Components/ProfileContent.css"
 
-import { UserContext } from '../Context/UserContext';
-import { ModalContext } from '../Context/ModalContext';
+// import { UserContext } from '../Context/UserContext'
+import { ModalContext } from '../Context/ModalContext'
 
 const ProfileContent = () => {
-    const { user } = useContext(UserContext)
+    const { id } = useParams()
+    const navigate = useNavigate()
+    // const { user } = useContext(UserContext)
+    const [user, setUser] = useState(null)
     const { setModalType, visible, setVisible } = useContext(ModalContext)
+
+    useEffect(() => {
+        getUser()
+    },[])
+  
+    const getUser = async () =>{
+  
+        const response = await fetch(`http://localhost:5000/users/${id}`, {
+          credentials: "include"
+        })
+        const data = await response.json()
+        if (data.error) {
+            // navigate('/login')
+          } else {
+            setUser(data)
+        }
+    }
+  
+    if(!user) {
+        return <h1>Chargement...</h1>
+    }
 
     moment.locale("fr")
 
@@ -22,7 +47,7 @@ const ProfileContent = () => {
         }
     }
 
-    // console.log('followings', user.followings.length);
+    console.log("user", id)
     return (
         <>
             <div className='top'>
@@ -46,10 +71,12 @@ const ProfileContent = () => {
 
                 <div className='profile'>
                     <div className='edit'>
-                        <img src="https://i.pinimg.com/564x/7e/f2/c3/7ef2c3686d046a856ee66b26145e77b6.jpg" class="rounded-circle profile-picture" alt="..." />
+                        <img 
+                            src="https://i.pinimg.com/564x/7e/f2/c3/7ef2c3686d046a856ee66b26145e77b6.jpg" 
+                            className="rounded-circle profile-picture" alt="..." />
                         <button 
                             type="button" 
-                            class="btn rounded-pill edit-btn"
+                            className="btn rounded-pill edit-btn"
                             onClick={() => handleModal("editProfile")}
                         >Éditer le profil
                         </button>

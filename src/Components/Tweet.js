@@ -22,6 +22,9 @@ const FooterIcon = styled.div`
 const FooterNum = styled.div`
   width: 50px;
   color: black;
+  &:hover {
+    color: teal;
+  }
 `
 const FooterZone = styled.a`
   text-decoration: none;
@@ -29,7 +32,6 @@ const FooterZone = styled.a`
   width: 80px;
   &:hover {
     fill: teal;
-    color: teal;
   }
 `
 

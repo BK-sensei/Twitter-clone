@@ -20,7 +20,6 @@ const Home = () => {
         <div className="row">
             <div className="col-6"
                 style={{ backgroundImage: `url("https://abs.twimg.com/sticky/illustrations/lohp_1302x955.png")`}}
-            
             >
                 <div className="left-part">
                     <svg 

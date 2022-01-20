@@ -17,10 +17,25 @@
 }
 
 /* Bouton flêche 'retour en arrière' */
+
+.div-arrow{
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(233, 232, 232);
+    margin-right: 50px;
+    visibility: hidden;
+}
+.div-arrow:hover{
+    visibility: visible;
+}
+
 .arrow {
-    width: 20px;
-    height: 20px;
-    margin-right: 60px;
+    width: 23px;
+    height: 23px;
+    visibility: visible;
 }
 
 /* Username de l'user et son nombre de tweets */
@@ -80,6 +95,9 @@ p{
     margin-bottom: 12px;
     transition-property: background-color, box-shadow;
     transition-duration: 0.2s;
+}
+.edit-btn:hover{
+    background-color: rgb(233, 232, 232);
 }
 
 .name-username p{

@@ -2,7 +2,6 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import styled from 'styled-components'
-import Button from './Button'
 
 import { UserContext } from '../Context/UserContext'
 
@@ -37,7 +36,7 @@ const Navbar = () => {
             Profile
           </NavLogo>
         </Link>
-        <Button text="Tweet" width="200px"/>
+        <button type="button" className="btn rounded-pill btn-primary">Tweet</button>
       </nav>
     </div>
   )

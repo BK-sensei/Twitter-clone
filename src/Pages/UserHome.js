@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 
-import Navbar from '../Components/Navbar'
+import Menu from '../Components/Menu'
 
 import { UserContext } from '../Context/UserContext'
 
@@ -10,13 +10,13 @@ const UserHome = () => {
     console.log(user)
     return (
         <div className='row'>
-            <div className='col-3 p-5 border-end'>
-                <Navbar />
+            <div className='col-3 border-end p-4 d-flex flex-column' style={{height: "100vh"}}>
+                <Menu />
             </div>
             <div className='col-6'>
                 middle
             </div>
-            <div className='col-3'>
+            <div className='col-3 p-5 border-start'>
                 right
             </div>
         </div>

@@ -11,7 +11,6 @@ import Button from './Button'
 
 const LoginLogo = styled.div`
     width: 50px;
-    color: blue;
 `
 const Separator = styled.div`
     border-top: 1px solid rgb(207, 217, 222);

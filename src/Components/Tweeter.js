@@ -70,17 +70,17 @@ const Tweeter = () => {
               <textarea 
                 className="form-control" 
                 placeholder="Leave a comment here" 
+                maxLength="280"
                 id="floatingTextarea2" 
                 style={{height: "100px", borderRight: "none", borderTop: "none", borderLeft: "none", borderRadius: "0"}}
                 onChange={handleTextarea}
               ></textarea>
-              <label htmlFor="floatingTextarea2">Text</label>
+              <label htmlFor="floatingTextarea2" className='whatsup'>Quoi de neuf ?</label>
             </div>
             <Tweeting>
               <button 
                 type="submit" 
-                className="btn rounded-pill btn-primary"
-                style={{width: "80px"}}
+                className="btn rounded-pill tweet"
               >
                 Tweet
               </button>

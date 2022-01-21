@@ -1,10 +1,12 @@
 import React, { useContext } from 'react'
 import { UserContext } from '../Context/UserContext';
+import { ModalContext } from '../Context/ModalContext';
 import { useFormik } from 'formik';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 const EditProfile = () => {
     const { user, setUser } = useContext(UserContext)
+    const { visible, setVisible } = useContext(ModalContext)
 
     const formik = useFormik({
         initialValues: {
@@ -13,15 +15,8 @@ const EditProfile = () => {
             location: user.location,
             website: user.location
         },
-        // onSubmit:(values, { resetForm }) =>{
-        //     setUser(values)
-        //     .then(response => {
-        //         setUser(response)
-        //         resetForm()
-        //     })
-        // }
         onSubmit:(values) =>{ 
-            console.log(values);
+            console.log("values ",values);
             edit(values)
         }
     })
@@ -35,30 +30,22 @@ const EditProfile = () => {
           },
           credentials: 'include',
           body: JSON.stringify({
-            values
+            ...values
           })
         })
-        const res = editProfile.json()
-        console.log(res);
+        const profileEdited = await editProfile.json()
+        setUser(profileEdited)
+        setVisible(false)
     }
 
     return (
         <>
-            {/* <div className='d-flex justify-content-between align-items-center ms-4'>
-                <h3>Éditer le profil</h3>
-                <button 
-                    type="button" 
-                    class="btn rounded-pill btn-dark"
-                    onSubmit={edit}
-                >Enregistrer
-                </button>
-            </div> */}
             <div>
                 <form className='d-flex flex-column' onSubmit={formik.handleSubmit}>
                     <div className='d-flex justify-content-between align-items-center ms-4'>
                         <h3>Éditer le profil</h3>
                         <button 
-                            type="button" 
+                            type="submit" 
                             class="btn rounded-pill btn-dark"
                         >Enregistrer
                         </button>

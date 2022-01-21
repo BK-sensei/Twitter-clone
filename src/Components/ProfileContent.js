@@ -26,7 +26,7 @@ const ProfileContent = () => {
         })
         const data = await response.json()
         if (data.error) {
-            // navigate('/login')
+            navigate('/login')
           } else {
             setUser(data)
         }
@@ -47,7 +47,6 @@ const ProfileContent = () => {
         }
     }
 
-    // console.log("user", id)
     return (
         <>
             <div className='top'>
@@ -70,10 +69,8 @@ const ProfileContent = () => {
                 </div>
 
                 <div className='profile'>
-                    <div className='edit'>
-                        <img 
-                            src="https://i.pinimg.com/564x/7e/f2/c3/7ef2c3686d046a856ee66b26145e77b6.jpg" 
-                            className="rounded-circle profile-picture" alt="..." />
+                    <div className='edit d-flex justify-content-between'>
+                        <img src="https://i.pinimg.com/564x/7e/f2/c3/7ef2c3686d046a856ee66b26145e77b6.jpg" class="rounded-circle profile-picture" alt="..." />
                         <button 
                             type="button" 
                             className="btn rounded-pill edit-btn"
@@ -121,7 +118,7 @@ const ProfileContent = () => {
                         </div>
                     </div>
 
-                    <div className='follow'>
+                    <div className='d-flex'>
                         <p><span className='number'>{user.followings.length}</span>abonnements</p>
                         <p><span className='number'>{user.followers.length}</span>abonnés</p>
                     </div>
@@ -135,7 +132,7 @@ const ProfileContent = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default ProfileContent;
+export default ProfileContent

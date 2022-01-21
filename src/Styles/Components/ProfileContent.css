@@ -17,7 +17,6 @@
 }
 
 /* Bouton flêche 'retour en arrière' */
-
 .div-arrow{
     width: 35px;
     height: 35px;
@@ -31,7 +30,6 @@
 .div-arrow:hover{
     visibility: visible;
 }
-
 .arrow {
     width: 23px;
     height: 23px;
@@ -69,8 +67,6 @@ p{
 
 .edit{
     height: 75px;
-    display: flex;
-    justify-content: space-between;
 }
 
 .profile-picture{
@@ -100,18 +96,22 @@ p{
     background-color: rgb(233, 232, 232);
 }
 
+/* Username et nom de l'user */
 .name-username p{
     font-size: 15px;
     margin-bottom: 20px;
 }
 
+/* Div contenant les infos de l'user */
 .info{
     display: flex;
     margin-bottom: 12px;
     flex-wrap: wrap;
 }
 
+/* Bio de l'user */
 .bio p{
+    width: 100%;
     color: rgb(15, 20, 25);
     font-weight: 400;
     line-height: 20px;
@@ -119,13 +119,14 @@ p{
     margin-bottom: 20px;
 }
 
+/* Icone date de naissance */
 .bday-icon{
     width: 16px;
     height: 16px;
     color: rgb(83, 100, 113);
 }
 
-/* Icons des infos de l'user */
+/* Icones des infos de l'user */
 .info .icon{
     display: flex;
     gap: 4px;
@@ -133,21 +134,18 @@ p{
     margin: 0px 0px 12px;
 }
 
-/* Followings et followers de l'user */
-.follow{
-    display: flex;
-}
+/* Nombre de followings et followers de l'user */
 .number{
     font-weight: bold;
     margin-right: 4px;
 }
 
+/* Div des tweets, retweets, comments et likes de l'user */
 .userTweets{
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-
 .userTweets h4{
     color: rgb(15, 20, 25);
     font-weight: 700;

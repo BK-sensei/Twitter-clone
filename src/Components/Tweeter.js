@@ -30,6 +30,7 @@ const Tweeter = () => {
               className="form-control" 
               // placeholder="Leave a comment here" 
               id="floatingTextarea2" 
+              maxLength="280"
               style={{height: "100px", borderRight: "none", borderTop: "none", borderLeft: "none", borderRadius: "0"}}
             ></textarea>
             <label htmlFor="floatingTextarea2" className='whatsup'>Quoi de neuf ?</label>

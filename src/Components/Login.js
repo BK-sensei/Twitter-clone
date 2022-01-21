@@ -127,7 +127,7 @@ const Login = () => {
                     <div className='col-12 d-flex flex-column align-items-center'>
                         <div className="input-group input-group-lg" style={{width: "320px"}}>
                             <input 
-                                type="text" 
+                                type="password" 
                                 className="form-control" 
                                 id="password"
                                 name="password"

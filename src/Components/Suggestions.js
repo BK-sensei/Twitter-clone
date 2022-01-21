@@ -83,6 +83,7 @@ const Suggestions = () => {
             name={element.name}
             id={element._id}
             username={element.username}
+            followers={element.followers}
           />
         ))}
       </div>

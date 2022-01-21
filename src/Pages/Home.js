@@ -56,9 +56,9 @@ const Home = () => {
                 >
                     S'inscire avec un e-mail
                 </button>
-                <p>En vous inscrivant, vous acceptez les <span className="blue">Conditions d'Utilisation</span> et la <span className="blue">Politique de Confidentialité</span>, incluant l'<span className="blue">Utilisation de Cookies</span>.</p>
+                <p className='conditions'>En vous inscrivant, vous acceptez les <span className="blueText">Conditions d'Utilisation</span> et la <span className="blueText">Politique de Confidentialité</span>, incluant l'<span className="blueText">Utilisation de Cookies</span>.</p>
                 <div className="connexion">
-                    <h3>Vous avez déjà un compte ?</h3>
+                    <h3 className='alreadyAccount'>Vous avez déjà un compte ?</h3>
                     <button 
                         type="button" 
                         className="btn rounded-pill login" 

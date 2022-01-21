@@ -32,7 +32,7 @@ const UserHome = () => {
             </div>
             <div className='col-6'>
                 <Top>
-                    Home
+                    Accueil
                 </Top>
                 <Tweeter />
                 <Feed />

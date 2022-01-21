@@ -1,0 +1,17 @@
+textarea{
+    resize: none;
+}
+
+.whatsup{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.tweet{
+    background-color: #1C9CEF;
+    font-weight: bold;
+    color: white;
+    height: 40px !important;
+    padding: 0 18px;
+    margin-top: 0px !important;
+}

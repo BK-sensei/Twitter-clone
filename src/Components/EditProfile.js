@@ -2,11 +2,10 @@ import React, { useContext } from 'react'
 import { UserContext } from '../Context/UserContext';
 import { ModalContext } from '../Context/ModalContext';
 import { useFormik } from 'formik';
-// import { useParams } from 'react-router-dom';
 
 const EditProfile = () => {
     const { user, setUser } = useContext(UserContext)
-    const { visible, setVisible } = useContext(ModalContext)
+    const { setVisible } = useContext(ModalContext)
 
     const formik = useFormik({
         initialValues: {
@@ -34,8 +33,8 @@ const EditProfile = () => {
           })
         })
         const profileEdited = await editProfile.json()
-        setUser(profileEdited)
-        setVisible(false)
+        setUser(profileEdited) // mise à jour des valeurs de l'user
+        setVisible(false) // fermeture de la modal lorsqu'on enregistre les modifications
     }
 
     return (

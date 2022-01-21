@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import moment from "moment"
 import 'moment/locale/fr'
 import "../Styles/Components/ProfileContent.css"
 
-import { UserContext } from '../Context/UserContext';
-import { ModalContext } from '../Context/ModalContext';
+import { UserContext } from '../Context/UserContext'
+import { ModalContext } from '../Context/ModalContext'
 
 const ProfileContent = () => {
     const { user } = useContext(UserContext)
@@ -22,7 +22,6 @@ const ProfileContent = () => {
         }
     }
 
-    // console.log('followings', user.followings.length);
     return (
         <>
             <div className='top'>
@@ -45,7 +44,7 @@ const ProfileContent = () => {
                 </div>
 
                 <div className='profile'>
-                    <div className='edit'>
+                    <div className='edit d-flex justify-content-between'>
                         <img src="https://i.pinimg.com/564x/7e/f2/c3/7ef2c3686d046a856ee66b26145e77b6.jpg" class="rounded-circle profile-picture" alt="..." />
                         <button 
                             type="button" 
@@ -94,7 +93,7 @@ const ProfileContent = () => {
                         </div>
                     </div>
 
-                    <div className='follow'>
+                    <div className='d-flex'>
                         <p><span className='number'>{user.followings.length}</span>abonnements</p>
                         <p><span className='number'>{user.followers.length}</span>abonnés</p>
                     </div>
@@ -108,7 +107,7 @@ const ProfileContent = () => {
                 </div>
             </div>
         </>
-    );
-};
+    )
+}
 
-export default ProfileContent;
+export default ProfileContent

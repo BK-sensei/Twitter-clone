@@ -1,7 +1,5 @@
 import React from 'react'
 
-import Button from './Button'
-
 const UserCard = (props) => {
   const { name, username } = props
 
@@ -12,6 +10,7 @@ const UserCard = (props) => {
           <img 
               className='img-fluid rounded-circle me-2'
               style={{width: '50px', height: '50px'}}
+              alt=''
               src='https://64.media.tumblr.com/1e5b47b37acbf39ed06ea0076b95e14c/1a332bd0df30b373-86/s500x750/828896df7f73508fdabb5fd9c186d16bb6b0d33a.png' 
           />
           <div className='d-flex flex-column'>

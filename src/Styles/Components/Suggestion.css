@@ -18,7 +18,11 @@
     background-color: rgb(239, 243, 244);
     padding: 15px;
     border-radius: 16px;
+    margin-bottom: 20px;
 }
-.suggestTitle{
-    margin-bottom: 25px;
+
+.tendance{
+    color:  black;
+    font-weight: bold;
+    padding: 5px 0px;
 }

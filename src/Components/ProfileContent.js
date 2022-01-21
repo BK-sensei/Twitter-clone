@@ -17,7 +17,7 @@ const ProfileContent = () => {
 
     useEffect(() => {
         getUser()
-    },[])
+    },[id])
   
     const getUser = async () =>{
   

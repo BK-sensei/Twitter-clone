@@ -1,15 +1,29 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 
 import { UserContext } from '../Context/UserContext'
 
 const UserCard = (props) => {
-  const { name, username, id } = props
+  const { name, username, id, followers } = props
   const { user, setUser } = useContext(UserContext)
 
   const handleFollowings = (id) => {
     const newFollowings = [...user.followings, id]
     updateFollowings(newFollowings)
+
+    const newFollowers = [...followers, user._id]
+    updateFollowers(newFollowers)
+  }
+  const handleUnFollowings = (id) => {
+    const newFollowings = user.followings
+    const indexFollowings = newFollowings.findIndex(element => element === id)
+    newFollowings.splice(indexFollowings, 1)
+    updateFollowings(newFollowings)
+
+    const newFollowers = followers
+    const indexFollowers = newFollowings.findIndex(element => element === user._id)
+    newFollowers.splice(indexFollowers, 1)
+    updateFollowers(newFollowers)
   }
   const updateFollowings = async (newFollowings) => {
     const response = await fetch(`http://localhost:5000/users/${user._id}`, {
@@ -25,9 +39,17 @@ const UserCard = (props) => {
     const data = await response.json()
     setUser(data)
   }
-  const handleUnFollowings = (id) => {
-    const result = user.followings.findIndex(element => element == id)
-    console.log(result)
+  const updateFollowers = async (newFollowers) => {
+    await fetch(`http://localhost:5000/users/${id}`, {
+      method: 'put',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        followers: newFollowers
+      })
+    })
   }
 
   return (
@@ -41,8 +63,21 @@ const UserCard = (props) => {
               src='https://64.media.tumblr.com/1e5b47b37acbf39ed06ea0076b95e14c/1a332bd0df30b373-86/s500x750/828896df7f73508fdabb5fd9c186d16bb6b0d33a.png' 
           />
           <div className='d-flex flex-column'>
-              <h6 className="card-title fw-bold" style={{width:'100px', fontSize:'16px', textOverflow: 'ellipsis', overflow: 'hidden'}}>{name}</h6>
-              <h6 className="card-subtitle mb-2 text-muted" style={{width:'100px', textOverflow: 'ellipsis', fontSize:'14px'}}>@{username}</h6>
+            <Link to={`/user/${id}`}>
+
+                <h6 
+                  className="card-title fw-bold" 
+                  style={{width:'100px', fontSize:'16px', textOverflow: 'ellipsis', overflow: 'hidden'}}
+                >
+                  {name}
+                </h6>
+            </Link>
+            <h6 
+              className="card-subtitle mb-2 text-muted" 
+              style={{width:'100px', textOverflow: 'ellipsis', fontSize:'14px'}}
+            >
+              @{username}
+            </h6>
           </div>
         <div >
         {user.followings.includes(id) ? 

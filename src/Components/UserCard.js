@@ -1,11 +1,31 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
-import Button from './Button'
+import { UserContext } from '../Context/UserContext'
 
 const UserCard = (props) => {
-  const { name, username, id } = props
+  const { name, username, id, followings } = props
+  const { user } = useContext(UserContext)
+  const [arrayFollowings, setArrayFollowings] = useState(followings)
 
+  const handleFollowings = (id) => {
+    setArrayFollowings([...followings, id])
+    updateFollowings(id)
+  }
+  const updateFollowings = async (id) => {
+    await fetch(`http://localhost:5000/users/${user._id}`, {
+      method: 'put',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        followings: [...followings, id]
+      })
+    })
+  }
+
+  // console.log(arrayFollowings)
   return (
     <div>
       <div className="card mb-2 flex-row align-items-center" style={{width: "18rem"}}>
@@ -25,7 +45,22 @@ const UserCard = (props) => {
           </p> */}
         </div>
         <div className='me-3'>
-          <Button text="Follow" width="50px"/>
+          {arrayFollowings.includes(id) ? 
+            <button 
+              type="button" 
+              className="btn btn-primary rounded-pill"
+            >
+              Unfollow
+            </button>
+          :
+            <button 
+              type="button" 
+              className="btn btn-outline-primary rounded-pill"
+              onClick={() => handleFollowings(id)}
+            >
+              Follow
+            </button> 
+          }
         </div>
       </div>
     </div>

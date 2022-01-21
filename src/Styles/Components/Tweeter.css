@@ -1,0 +1,16 @@
+textarea{
+    resize: none;
+}
+
+.whatsup{
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.blue{
+    background-color: #1C9CEF;
+    color: white;
+    height: 40px !important;
+    padding: 0 18px;
+    margin-top: 0px !important;
+}

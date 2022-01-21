@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import styled from 'styled-components'
 import { date } from 'yup/lib/locale'
 import { UserContext } from '../Context/UserContext'
+import { ModalContext } from '../Context/ModalContext'
 
 const SignupTitle = styled.h2`
   font-weight: normal;
@@ -28,6 +29,7 @@ const ErrorForm = styled.div`
 const Signup = () => {
   const navigate = useNavigate()
   const { setUser } = useContext(UserContext)
+  const { setVisible } = useContext(ModalContext)
   const [errorSignup, setErrorSignup] = useState(null)
 
   const formik = useFormik({
@@ -104,6 +106,7 @@ const Signup = () => {
     } else {
       const data = await loginResponse.json()
       setUser(data)
+      setVisible(false)
       navigate('/home')
     }
   }

@@ -66,6 +66,10 @@ h2{
     margin: 0 20px 8px 0;
     cursor: pointer;
 }
+.signup:hover{
+    background-color: rgb(28, 115, 172);
+    color: white;
+}
 
 /* Règles de confidentialités */
 p{
@@ -77,8 +81,12 @@ p{
     margin: 0 0 20px;
 }
 
-.blue{
+.blueText{
     color: #1C9CEF;
+}
+.conditions{
+    font-size: 11px;
+    line-height: 12px;
 }
 
 /* Contenant login */
@@ -95,6 +103,9 @@ h3{
     line-height: 20px;
     margin: 0 0 20px;
 }
+.alreadyAccount{
+    margin-bottom: 20px;
+}
 
 /* Bouton login */
 .login{
@@ -109,6 +120,10 @@ h3{
     border-color: rgb(207, 217, 222);
     border-width: 1px;
     border-style: solid;
+}
+.login:hover{
+    background-color: rgb(220, 239, 250);
+    color: #1C9CEF;
 }
 
 footer {

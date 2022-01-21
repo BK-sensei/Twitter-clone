@@ -37,7 +37,7 @@ const Tweeter = () => {
           <Tweeting>
             <button 
               type="button" 
-              className="btn rounded-pill blue"
+              className="btn rounded-pill tweet"
             >
               Tweeter
             </button>

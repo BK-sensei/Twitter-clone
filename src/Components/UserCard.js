@@ -25,8 +25,11 @@ const UserCard = (props) => {
     const data = await response.json()
     setUser(data)
   }
+  const handleUnFollowings = (id) => {
+    const result = user.followings.findIndex(element => element == id)
+    console.log(result)
+  }
 
-  // console.log(user.followings)
   return (
     <>
       <div className="mb-4 d-flex flex-row justify-content-between align-items-center">
@@ -47,6 +50,7 @@ const UserCard = (props) => {
           type='button'
             className='btn rounded-pill btn-dark fw-bold'
             style={{width:'75px', fontSize:'13px'}}
+            onClick={() => handleUnFollowings(id)}
           >
             unSuivre
           </button>

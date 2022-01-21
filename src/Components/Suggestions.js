@@ -28,12 +28,13 @@ const Suggestions = () => {
       return <h1>Chargement...</h1>
   }
 
-  console.log(users)
+  // console.log(users)
   return (
     <div>
       {users.map(element => (
         <UserCard 
           key={element._id}
+          id={element._id}
           name={element.name}
           username={element.username}
         />

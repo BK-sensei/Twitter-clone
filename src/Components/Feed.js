@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Tweet from '../Components/Tweet'
+import { FeedContext } from '../Context/FeedContext'
 
 const Feed = () => {
-  const [feed, setFeed] = useState()
+  // const [feed, setFeed] = useState()
+  const { feed, setFeed } = useContext(FeedContext)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -19,6 +21,9 @@ const Feed = () => {
       if (data.error) {
           navigate('/login')
         } else {
+          data.sort((a,b) =>{
+            return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+          }).reverse()
           setFeed(data)
       }
   }

@@ -3,7 +3,8 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 
 import { UserContext } from '../Context/UserContext'
-import { ModalContext } from '../Context/ModalContext'
+import { FeedContext } from '../Context/FeedContext'
+
 
 const Tweeting = styled.div`
   display: flex;
@@ -13,9 +14,8 @@ const Tweeting = styled.div`
 
 const Tweeter = () => {
   const { user } = useContext(UserContext)
+  const { feed, setFeed } = useContext(FeedContext)
   const [text, setText] = useState(null)
-  const {visible, setVisible } = useContext(ModalContext)
-
 
   const handleTextarea = (e) => {
     setText(e.target.value)
@@ -24,16 +24,10 @@ const Tweeter = () => {
   const handleSubmit = (e) => {
     e.preventDefault()
     tweeter()
-
-    if (visible) {
-      setVisible(false)
-    } else {
-      setVisible(true)
-    }
   }
 
   const tweeter = async () => {
-    await fetch('http://localhost:5000/tweets', {
+    const response = await fetch('http://localhost:5000/tweets', {
       method: 'post',
       headers: {
         'Content-type': 'application/json'
@@ -47,9 +41,15 @@ const Tweeter = () => {
         retweets : []
       })
     })
+    const data = await response.json()
+    const result = [
+      data,
+      ...feed
+    ]
+    setFeed(result)
   }
-
-  // console.log(user)
+  
+  // console.log(result)
   return (
     <div>
       <div className='row border-bottom'>
@@ -58,6 +58,7 @@ const Tweeter = () => {
             className='img-fluid rounded-circle'
             // style={{width: '50%'}}
             src='https://abs.twimg.com/sticky/default_profile_images/default_profile_400x400.png' 
+            alt='default_profile'
           />
         </div>
         <div className='col-10 mb-3'>

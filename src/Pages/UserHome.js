@@ -1,12 +1,11 @@
-import React, { useContext } from 'react'
+import React from 'react'
 
 import styled from 'styled-components'
 
 import Menu from '../Components/Menu'
 import Tweeter from '../Components/Tweeter'
 import Suggestions from '../Components/Suggestions'
-
-import { UserContext } from '../Context/UserContext'
+import Feed from '../Components/Feed'
 
 const Top = styled.div` 
   width: 100%;
@@ -21,9 +20,7 @@ const Top = styled.div`
 `
 
 const UserHome = () => {
-    const { user } = useContext(UserContext)
 
-    console.log(user)
     return (
         <div className='row'>
             <div className='col-3 border-end p-4 d-flex flex-column' >
@@ -34,6 +31,7 @@ const UserHome = () => {
                     Accueil
                 </Top>
                 <Tweeter />
+                <Feed />
             </div>
             <div className='col-3 p-4 border-start'>
                 <Suggestions />

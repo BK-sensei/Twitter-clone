@@ -30,25 +30,26 @@ const Explorer = () => {
         return <h1>Chargement...</h1>
     }
 
-    console.log(tweets)
+    // console.log(tweets)
     return (
         <div className='row'>
             <div className='col-3 border-end p-4 d-flex flex-column'>
                 <Menu />
             </div>
             <div className='col-6'>
-            {tweets.map(element => (
-                <Tweet 
-                    key={element._id}
-                    id={element._id}
-                    name={element.user.name}
-                    username={element.user.username}
-                    createdAt={element.createdAt}
-                    text={element.text}
-                    numRetweets={element.retweets.length}
-                    numComments={element.comments.length}
-                />
-            ))}
+                {tweets.map(element => (
+                    <Tweet 
+                        key={element._id}
+                        id={element._id}
+                        userid={element.user._id}
+                        name={element.user.name}
+                        username={element.user.username}
+                        createdAt={element.createdAt}
+                        text={element.text}
+                        numRetweets={element.retweets.length}
+                        numComments={element.comments.length}
+                    />
+                ))}
             </div>
             <div className='col-3 p-4 border-start'>
                 <Suggestions />

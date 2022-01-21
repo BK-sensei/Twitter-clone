@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { UserContext } from '../Context/UserContext';
 import { ModalContext } from '../Context/ModalContext';
 import { useFormik } from 'formik';
+// import { useParams } from 'react-router-dom';
 
 const EditProfile = () => {
     const { user, setUser } = useContext(UserContext)

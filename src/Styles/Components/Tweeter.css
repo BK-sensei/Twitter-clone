@@ -15,3 +15,7 @@ textarea{
     padding: 0 18px;
     margin-top: 0px !important;
 }
+.tweet:hover{
+    background-color: rgb(28, 115, 172);
+    color: white;
+}

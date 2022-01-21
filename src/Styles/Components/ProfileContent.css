@@ -45,7 +45,7 @@ h3{
     color: rgb(15, 20, 25);
     font-weight: 700;
 }
-p{
+p, a{
     font-size: 13px;
     color: rgb(83, 100, 113);;
 }

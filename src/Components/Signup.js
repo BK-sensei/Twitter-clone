@@ -163,7 +163,7 @@ const Signup = () => {
         <div className='col-12 my-2'>
           <div className="input-group input-group-lg">
               <input 
-                type="text" 
+                type="email" 
                 className="form-control" 
                 placeholder="Email"
                 name='email'
@@ -179,7 +179,7 @@ const Signup = () => {
         <div className='col-12 my-2'>
           <div className="input-group input-group-lg">
               <input 
-                type="text" 
+                type="password" 
                 className="form-control" 
                 placeholder="Mot de passe"
                 name='password'
@@ -195,7 +195,7 @@ const Signup = () => {
         <div className='col-12 my-2'>
           <div className="input-group input-group-lg">
               <input 
-                type="text" 
+                type="password" 
                 className="form-control" 
                 placeholder="Confirmer votre mot de passe"
                 name='passwordConfirmation'

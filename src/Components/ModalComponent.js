@@ -34,7 +34,7 @@ const ModalComponent = () => {
         }
     }
 
-    console.log(modalType)
+    // console.log(modalType)
     return (
         <>
             <Modal 

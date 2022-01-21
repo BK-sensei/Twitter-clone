@@ -34,6 +34,7 @@ const Suggestions = () => {
       {users.map(element => (
         <UserCard 
           key={element._id}
+          id={element._id}
           name={element.name}
           username={element.username}
         />

@@ -46,6 +46,7 @@ const Explorer = () => {
                         username={element.user.username}
                         createdAt={element.createdAt}
                         text={element.text}
+                        retweets={element.retweets}
                         numRetweets={element.retweets.length}
                         numComments={element.comments.length}
                     />

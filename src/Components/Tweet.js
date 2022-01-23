@@ -19,7 +19,7 @@ const Footer = styled.div`
 `
 const FooterIcon = styled.div`
   height: 2.5%;
-  width: 20px;
+  width: 80px;
   margin-right: 10px;
   &:hover {
     background-color: lightblue;
@@ -35,22 +35,34 @@ const FooterNum = styled.div`
 const FooterZone = styled.a`
   text-decoration: none;
   display: flex;
-  width: 80px;
+  width: 50px;
+  padding: 0 5px;
   &:hover {
+    border-radius: 30px;
+    background-color: lightblue;
     fill: teal;
   }
 `
 
 const Tweet = (props) => {
   moment.locale("fr")
-  const { user } = useContext(UserContext)
+  const { user, setUser } = useContext(UserContext)
   const { id, name, username, userid, createdAt, text, numRetweets, numComments, retweets } = props
   const [nbRetweets, setNbRetweets] = useState(numRetweets)
+  const [updateRetweets, setUpdateRetweets] = useState(retweets)
 
   const handleRetweet = () => {
     const newArrayRetweet = [...retweets, user._id]
     retweeter(newArrayRetweet)
     setNbRetweets(nbRetweets + 1)
+  }
+  const handleUntweet = () => {
+    // const newArrayRetweet = retweets
+    // const indexRetweets = newArrayRetweet.findIndex(element => element === id)
+    // newArrayRetweet.splice(indexRetweets, 1)
+    unRetweeter()
+    setNbRetweets(nbRetweets - 1)
+    // console.log(newArrayRetweet)
   }
 
   const retweeter = async (newArrayRetweet) => {
@@ -64,9 +76,31 @@ const Tweet = (props) => {
         user: newArrayRetweet
       })
     })
+    const response = await fetch(`http://localhost:5000/users/${user._id}`, {
+      credentials: "include"
+    })
+    const data = await response.json()
+      setUser(data)
+  }
+  const unRetweeter = async () => {
+    await fetch(`http://localhost:5000/tweets/unretweet/${id}`, {
+      method:'put',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        user: user._id
+      })
+    })
+    const response = await fetch(`http://localhost:5000/users/${user._id}`, {
+      credentials: "include"
+    })
+    const data = await response.json()
+      setUser(data)
   }
 
-  // console.log(createdAt)
+  // console.log(user.retweets)
   return (
     <div className='row d-flex border-bottom py-2'>
       <div className='col-2'>
@@ -96,14 +130,25 @@ const Tweet = (props) => {
               {numComments}
             </FooterNum>
           </FooterZone>
-          <FooterZone onClick={() => handleRetweet()}>
-            <FooterIcon>
-              <svg viewBox="0 0 24 24" aria-hidden="true" className=""><g><path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path></g></svg>
-            </FooterIcon>
-            <FooterNum>
-              {nbRetweets}
-            </FooterNum>
-          </FooterZone>
+          {user.retweets.includes(id) ?
+            <FooterZone onClick={() => handleUntweet()}>
+              <FooterIcon>
+                <svg viewBox="0 0 24 24" aria-hidden="true" className=""><g><path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path></g></svg>
+              </FooterIcon>
+              <FooterNum>
+                {nbRetweets}
+              </FooterNum>
+            </FooterZone>
+          :  
+            <FooterZone onClick={() => handleRetweet()}>
+              <FooterIcon>
+                <svg viewBox="0 0 24 24" aria-hidden="true" className=""><g><path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path></g></svg>
+              </FooterIcon>
+              <FooterNum>
+                {nbRetweets}
+              </FooterNum>
+            </FooterZone>
+          }
         </Footer>
       </div>
     </div>

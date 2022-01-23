@@ -18,7 +18,8 @@ const UserCard = (props) => {
               <h6 className="card-title fw-bold" style={{width:'100px', fontSize:'16px', textOverflow: 'ellipsis', overflow: 'hidden'}}>{name}</h6>
               <h6 className="card-subtitle mb-2 text-muted" style={{width:'100px', textOverflow: 'ellipsis', fontSize:'14px'}}>@{username}</h6>
           </div>
-        <div >
+        </div>
+        <div>
           <button
           type='button'
             className='btn rounded-pill btn-dark fw-bold'

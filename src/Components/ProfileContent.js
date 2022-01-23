@@ -19,7 +19,7 @@ const ProfileContent = () => {
         getUser()
     },[id, user])
   
-    const getUser = async () =>{
+    const getUser = async () => {
   
         const response = await fetch(`http://localhost:5000/users/${id}`, {
           credentials: "include"

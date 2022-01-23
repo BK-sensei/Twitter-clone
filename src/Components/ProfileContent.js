@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import moment from "moment"
 import 'moment/locale/fr'
 import "../Styles/Components/ProfileContent.css"
+import Tweet from './Tweet'
 
 import { UserContext } from '../Context/UserContext'
 import { ModalContext } from '../Context/ModalContext'
@@ -14,6 +15,9 @@ const ProfileContent = () => {
     const { user } = useContext(UserContext)
     const [userProfile, setUserProfile] = useState(null)
     const { setModalType, visible, setVisible } = useContext(ModalContext)
+    const [userTweets, setUserTweets] = useState(null)
+    const [showRetweets, setShowRetweets] = useState(false)
+    const [userRetweets, setUserRetweets] = useState(null)
 
     useEffect(() => {
         getUser()
@@ -31,8 +35,43 @@ const ProfileContent = () => {
             setUserProfile(data)
         }
     }
-  
-    if(!userProfile) {
+
+    useEffect(() => {
+        getTweet()
+    },[visible, user])
+
+    const getTweet = async () =>{
+
+        const userTweets = await fetch('http://localhost:5000/tweets', {
+          credentials: "include"
+        })
+        const dataTweets = await userTweets.json()
+        if (dataTweets.error) {
+            navigate('/login')
+          } else {
+            const result = dataTweets.filter(element => element.user._id === user._id)
+            result.sort((a,b) =>{
+                return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+              }).reverse()
+            setUserTweets(result)
+        }
+        const userRetweets = await fetch('http://localhost:5000/tweets/retweets', {
+          credentials: "include"
+        })
+        const dataRetweets = await userRetweets.json()
+        if (dataRetweets.error) {
+            navigate('/login')
+          } else {
+            const result = dataRetweets.filter(element => element.user._id !== user._id)
+            result.sort((a,b) =>{
+                return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+              }).reverse()
+            setUserRetweets(result)
+        }
+
+    }
+    
+    if(!userProfile || !userTweets || !userRetweets) {
         return <h1>Chargement...</h1>
     }
 
@@ -47,6 +86,14 @@ const ProfileContent = () => {
         }
     }
 
+    const handleShowRetweets = () => {
+        setShowRetweets(true)
+    }
+    const handleShowTweets = () => {
+        setShowRetweets(false)
+    }
+
+    // console.log(userRetweets)
     return (
         <>
             <div className='top'>
@@ -70,13 +117,15 @@ const ProfileContent = () => {
 
                 <div className='profile'>
                     <div className='edit d-flex justify-content-between'>
-                        <img src="https://i.pinimg.com/564x/7e/f2/c3/7ef2c3686d046a856ee66b26145e77b6.jpg" class="rounded-circle profile-picture" alt="..." />
-                        <button 
-                            type="button" 
-                            className="btn rounded-pill edit-btn"
-                            onClick={() => handleModal("editProfile")}
-                        >Éditer le profil
-                        </button>
+                        <img src="https://i.pinimg.com/564x/7e/f2/c3/7ef2c3686d046a856ee66b26145e77b6.jpg" className="rounded-circle profile-picture" alt="..." />
+                        {user._id === id && 
+                            <button 
+                                type="button" 
+                                className="btn rounded-pill edit-btn"
+                                onClick={() => handleModal("editProfile")}
+                                >Éditer le profil
+                            </button>
+                        }
                     </div>
 
                     <div className='name-username'>
@@ -125,11 +174,42 @@ const ProfileContent = () => {
                 </div>
 
                 <div className='userTweets border-bottom'>
-                    <h4>Tweets</h4>
-                    <h4>Retweet</h4>
-                    <h4>Réponses</h4>
-                    <h4>J'aime</h4>
+                    <h4 onClick={handleShowTweets}>Tweets</h4>
+                    <h4 onClick={handleShowRetweets}>Retweet</h4>
+                    {/* <h4>Réponses</h4>
+                    <h4>J'aime</h4> */}
                 </div>
+                {!showRetweets ? 
+                    userTweets.map(element => (
+                        <Tweet 
+                            key={element._id}
+                            id={element._id}
+                            userid={element.user._id}
+                            name={element.user.name}
+                            username={element.user.username}
+                            createdAt={element.createdAt}
+                            text={element.text}
+                            retweets={element.retweets}
+                            numRetweets={element.retweets.length}
+                            numComments={element.comments.length}
+                        />
+                    ))
+                :
+                    userRetweets.map(element => (
+                        <Tweet 
+                            key={element._id}
+                            id={element._id}
+                            userid={element.user._id}
+                            name={element.user.name}
+                            username={element.user.username}
+                            createdAt={element.createdAt}
+                            text={element.text}
+                            retweets={element.retweets}
+                            numRetweets={element.retweets.length}
+                            numComments={element.comments.length}
+                        />
+                    ))
+                }
             </div>
         </>
     )

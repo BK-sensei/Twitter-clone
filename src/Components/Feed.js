@@ -46,6 +46,7 @@ const Feed = () => {
             text={element.text}
             numRetweets={element.retweets.length}
             numComments={element.comments.length}
+            retweets={element.retweets}
         />
       ))}
     </div>

@@ -71,7 +71,7 @@ const ProfileContent = () => {
 
     }
     
-    if(!userProfile || !userTweets || ! userRetweets) {
+    if(!userProfile || !userTweets || !userRetweets) {
         return <h1>Chargement...</h1>
     }
 

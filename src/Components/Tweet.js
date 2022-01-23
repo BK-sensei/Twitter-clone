@@ -49,10 +49,10 @@ const Tweet = (props) => {
   const { user, setUser } = useContext(UserContext)
   const { id, name, username, userid, createdAt, text, numRetweets, numComments, retweets } = props
   const [nbRetweets, setNbRetweets] = useState(numRetweets)
+  const [arrayRetweets, setArrayRetweets] = useState(retweets)
 
   const handleRetweet = () => {
-    const newArrayRetweet = [...retweets, user._id]
-    retweeter(newArrayRetweet)
+    retweeter()
     setNbRetweets(nbRetweets + 1)
   }
   const handleUntweet = () => {
@@ -60,25 +60,8 @@ const Tweet = (props) => {
     setNbRetweets(nbRetweets - 1)
   }
 
-  const retweeter = async (newArrayRetweet) => {
-    await fetch(`http://localhost:5000/tweets/${id}`, {
-      method:'put',
-      headers: {
-        'Content-type': 'application/json'
-      },
-      credentials: "include",
-      body: JSON.stringify({
-        user: newArrayRetweet
-      })
-    })
-    const response = await fetch(`http://localhost:5000/users/${user._id}`, {
-      credentials: "include"
-    })
-    const data = await response.json()
-      setUser(data)
-  }
-  const unRetweeter = async () => {
-    await fetch(`http://localhost:5000/tweets/unretweet/${id}`, {
+  const retweeter = async () => {
+    const response = await fetch(`http://localhost:5000/tweets/${id}`, {
       method:'put',
       headers: {
         'Content-type': 'application/json'
@@ -88,14 +71,37 @@ const Tweet = (props) => {
         user: user._id
       })
     })
-    const response = await fetch(`http://localhost:5000/users/${user._id}`, {
+    const data = await response.json()
+    setArrayRetweets(data.retweets)
+
+    const userResponse = await fetch(`http://localhost:5000/users/${user._id}`, {
       credentials: "include"
     })
+    const userData = await userResponse.json()
+    setUser(userData)
+  }
+  const unRetweeter = async () => {
+    const response = await fetch(`http://localhost:5000/tweets/unretweet/${id}`, {
+      method:'put',
+      headers: {
+        'Content-type': 'application/json'
+      },
+      credentials: "include",
+      body: JSON.stringify({
+        user: user._id
+      })
+    })
     const data = await response.json()
-      setUser(data)
+    setArrayRetweets(data.retweets)
+
+    const userResponse = await fetch(`http://localhost:5000/users/${user._id}`, {
+      credentials: "include"
+    })
+    const userData = await userResponse.json()
+    setUser(userData)
   }
 
-  // console.log(user.retweets)
+  // console.log("arr", arrayRetweets)
   return (
     <div className='row d-flex border-bottom py-2'>
       <div className='col-2'>
@@ -125,12 +131,13 @@ const Tweet = (props) => {
               {numComments}
             </FooterNum>
           </FooterZone>
-          {user.retweets.includes(id) ?
+          {arrayRetweets.includes(user._id) ?
             <FooterZone onClick={() => handleUntweet()}>
               <FooterIcon>
                 <svg viewBox="0 0 24 24" aria-hidden="true" className=""><g><path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path></g></svg>
               </FooterIcon>
               <FooterNum>
+                moins
                 {nbRetweets}
               </FooterNum>
             </FooterZone>
@@ -140,6 +147,7 @@ const Tweet = (props) => {
                 <svg viewBox="0 0 24 24" aria-hidden="true" className=""><g><path d="M23.77 15.67c-.292-.293-.767-.293-1.06 0l-2.22 2.22V7.65c0-2.068-1.683-3.75-3.75-3.75h-5.85c-.414 0-.75.336-.75.75s.336.75.75.75h5.85c1.24 0 2.25 1.01 2.25 2.25v10.24l-2.22-2.22c-.293-.293-.768-.293-1.06 0s-.294.768 0 1.06l3.5 3.5c.145.147.337.22.53.22s.383-.072.53-.22l3.5-3.5c.294-.292.294-.767 0-1.06zm-10.66 3.28H7.26c-1.24 0-2.25-1.01-2.25-2.25V6.46l2.22 2.22c.148.147.34.22.532.22s.384-.073.53-.22c.293-.293.293-.768 0-1.06l-3.5-3.5c-.293-.294-.768-.294-1.06 0l-3.5 3.5c-.294.292-.294.767 0 1.06s.767.293 1.06 0l2.22-2.22V16.7c0 2.068 1.683 3.75 3.75 3.75h5.85c.414 0 .75-.336.75-.75s-.337-.75-.75-.75z"></path></g></svg>
               </FooterIcon>
               <FooterNum>
+                plus
                 {nbRetweets}
               </FooterNum>
             </FooterZone>

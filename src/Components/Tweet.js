@@ -49,7 +49,6 @@ const Tweet = (props) => {
   const { user, setUser } = useContext(UserContext)
   const { id, name, username, userid, createdAt, text, numRetweets, numComments, retweets } = props
   const [nbRetweets, setNbRetweets] = useState(numRetweets)
-  const [updateRetweets, setUpdateRetweets] = useState(retweets)
 
   const handleRetweet = () => {
     const newArrayRetweet = [...retweets, user._id]
@@ -57,12 +56,8 @@ const Tweet = (props) => {
     setNbRetweets(nbRetweets + 1)
   }
   const handleUntweet = () => {
-    // const newArrayRetweet = retweets
-    // const indexRetweets = newArrayRetweet.findIndex(element => element === id)
-    // newArrayRetweet.splice(indexRetweets, 1)
     unRetweeter()
     setNbRetweets(nbRetweets - 1)
-    // console.log(newArrayRetweet)
   }
 
   const retweeter = async (newArrayRetweet) => {

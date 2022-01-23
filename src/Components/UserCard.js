@@ -52,6 +52,7 @@ const UserCard = (props) => {
     })
   }
 
+  // console.log(user.followings)
   return (
     <>
       <div className="mb-4 d-flex flex-row justify-content-between align-items-center">

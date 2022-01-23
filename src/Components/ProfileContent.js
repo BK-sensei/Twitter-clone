@@ -38,7 +38,7 @@ const ProfileContent = () => {
 
     useEffect(() => {
         getTweet()
-    },[visible])
+    },[visible, user])
 
     const getTweet = async () =>{
 

@@ -2,12 +2,10 @@ import React, { useContext, useState } from 'react'
 
 import styled from 'styled-components'
 import "../Styles/Components/Tweeter.css"
-// import { UserContext } from '../Context/UserContext'
-// import { useContext } from 'react/cjs/react.development'
 
 import { UserContext } from '../Context/UserContext'
 import { FeedContext } from '../Context/FeedContext'
-
+import { ModalContext } from '../Context/ModalContext'
 
 const Tweeting = styled.div`
   display: flex;
@@ -18,6 +16,7 @@ const Tweeting = styled.div`
 const Tweeter = () => {
   const { user } = useContext(UserContext)
   const { feed, setFeed } = useContext(FeedContext)
+  const { setVisible } = useContext(ModalContext)
   const [text, setText] = useState(null)
 
   const handleTextarea = (e) => {
@@ -50,6 +49,7 @@ const Tweeter = () => {
       ...feed
     ]
     setFeed(result)
+    setVisible(false)
   }
   
   // console.log(result)

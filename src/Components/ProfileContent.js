@@ -93,7 +93,7 @@ const ProfileContent = () => {
         setShowRetweets(false)
     }
 
-    console.log(userRetweets)
+    // console.log(userRetweets)
     return (
         <>
             <div className='top'>

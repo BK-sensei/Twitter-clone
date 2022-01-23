@@ -38,7 +38,7 @@ const ProfileContent = () => {
 
     useEffect(() => {
         getTweet()
-    },[visible, user])
+    },[visible, user, id])
 
     const getTweet = async () =>{
 
@@ -49,7 +49,7 @@ const ProfileContent = () => {
         if (dataTweets.error) {
             navigate('/login')
           } else {
-            const result = dataTweets.filter(element => element.user._id === user._id)
+            const result = dataTweets.filter(element => element.user._id === id)
             result.sort((a,b) =>{
                 return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
               }).reverse()
@@ -62,7 +62,7 @@ const ProfileContent = () => {
         if (dataRetweets.error) {
             navigate('/login')
           } else {
-            const result = dataRetweets.filter(element => element.user._id !== user._id)
+            const result = dataRetweets.filter(element => element.user._id !== id)
             result.sort((a,b) =>{
                 return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
               }).reverse()

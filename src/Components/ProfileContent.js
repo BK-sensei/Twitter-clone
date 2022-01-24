@@ -8,13 +8,17 @@ import Tweet from './Tweet'
 
 import { UserContext } from '../Context/UserContext'
 import { ModalContext } from '../Context/ModalContext'
+import { DeleteContext } from '../Context/DeleteContext'
 
 const ProfileContent = () => {
     const { id } = useParams()
     const navigate = useNavigate()
+
     const { user } = useContext(UserContext)
-    const [userProfile, setUserProfile] = useState(null)
+    const { deleted } = useContext(DeleteContext)
     const { setModalType, visible, setVisible } = useContext(ModalContext)
+    
+    const [userProfile, setUserProfile] = useState(null)
     const [userTweets, setUserTweets] = useState(null)
     const [showRetweets, setShowRetweets] = useState(false)
     const [userRetweets, setUserRetweets] = useState(null)
@@ -38,7 +42,7 @@ const ProfileContent = () => {
 
     useEffect(() => {
         getTweet()
-    },[visible, user, id])
+    },[visible, user, id, deleted])
 
     const getTweet = async () =>{
 

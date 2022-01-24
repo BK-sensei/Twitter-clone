@@ -5,6 +5,7 @@ import moment from "moment"
 import 'moment/locale/fr'
 
 import { UserContext } from '../Context/UserContext'
+import { DeleteContext } from '../Context/DeleteContext'
 
 import styled from 'styled-components'
 
@@ -57,6 +58,7 @@ const Title = styled.div`
 const Tweet = (props) => {
   moment.locale("fr")
   const { user, setUser } = useContext(UserContext)
+  const { setDeleted } = useContext(DeleteContext)
   const { id, name, username, userid, createdAt, text, numRetweets, numComments, retweets } = props
   const [nbRetweets, setNbRetweets] = useState(numRetweets)
   const [arrayRetweets, setArrayRetweets] = useState(retweets)
@@ -121,8 +123,8 @@ const Tweet = (props) => {
         user: user._id
       })
     })
-    // const data = await response.json()
-    // console.log(data)
+    const data = await response.json()
+    setDeleted(data)
   }
 
   return (

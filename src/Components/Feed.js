@@ -3,15 +3,16 @@ import { useNavigate } from 'react-router-dom'
 
 import Tweet from '../Components/Tweet'
 import { FeedContext } from '../Context/FeedContext'
+import { DeleteContext } from '../Context/DeleteContext'
 
 const Feed = () => {
-  // const [feed, setFeed] = useState()
   const { feed, setFeed } = useContext(FeedContext)
+  const { deleted } = useContext(DeleteContext)
   const navigate = useNavigate()
 
   useEffect(() => {
       getFeed()
-  },[])
+  },[deleted])
 
   const getFeed = async () =>{
       const response = await fetch('http://localhost:5000/tweets/feed', {

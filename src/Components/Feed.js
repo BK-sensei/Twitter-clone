@@ -3,15 +3,16 @@ import { useNavigate, Link } from 'react-router-dom'
 
 import Tweet from '../Components/Tweet'
 import { FeedContext } from '../Context/FeedContext'
+import { DeleteContext } from '../Context/DeleteContext'
 
 const Feed = () => {
-  // const [feed, setFeed] = useState()
   const { feed, setFeed } = useContext(FeedContext)
+  const { deleted } = useContext(DeleteContext)
   const navigate = useNavigate()
 
   useEffect(() => {
       getFeed()
-  },[])
+  },[deleted])
 
   const getFeed = async () =>{
       const response = await fetch('http://localhost:5000/tweets/feed', {
@@ -32,10 +33,11 @@ const Feed = () => {
       return <h1>Chargement...</h1>
   }
 
-  console.log(feed)
+  // console.log(feed)
   return (
     <div>
       {feed.map(element => (
+<<<<<<< HEAD
         <Link to={`/tweet/${element._id}`}>
           <Tweet 
               key={element._id}
@@ -49,6 +51,20 @@ const Feed = () => {
               numComments={element.comments.length}
           />
         </Link>
+=======
+        <Tweet 
+            key={element._id}
+            id={element._id}
+            userid={element.user._id}
+            name={element.user.name}
+            username={element.user.username}
+            createdAt={element.createdAt}
+            text={element.text}
+            numRetweets={element.retweets.length}
+            numComments={element.comments.length}
+            retweets={element.retweets}
+        />
+>>>>>>> 3aa2bdbde93da90372aebd4560c45c193a7ddde5
       ))}
     </div>
   )

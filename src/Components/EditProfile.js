@@ -16,7 +16,7 @@ const EditProfile = () => {
             website: user.location
         },
         onSubmit:(values) =>{ 
-            console.log("values ",values);
+            // console.log("values ",values);
             edit(values)
         }
     })

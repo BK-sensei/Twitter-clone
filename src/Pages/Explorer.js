@@ -1,11 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import Tweet from '../Components/Tweet'
 import Menu from '../Components/Menu'
 import Suggestions from '../Components/Suggestions'
 
+import { UserContext } from '../Context/UserContext'
+
 const Explorer = () => {
+    const { user } = useContext(UserContext)
     const [tweets, setTweets] = useState()
     const navigate = useNavigate()
 
@@ -22,7 +25,11 @@ const Explorer = () => {
         if (data.error) {
             navigate('/login')
           } else {
-            setTweets(data)
+            const result = data.filter(element => element.user._id !== user._id)
+            result.sort((a,b) =>{
+                return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+              }).reverse()
+            setTweets(result)
         }
     }
 
@@ -46,6 +53,7 @@ const Explorer = () => {
                         username={element.user.username}
                         createdAt={element.createdAt}
                         text={element.text}
+                        retweets={element.retweets}
                         numRetweets={element.retweets.length}
                         numComments={element.comments.length}
                     />

@@ -18,6 +18,7 @@ const Feed = () => {
         credentials: "include"
       })
       const data = await response.json()
+      console.log(data)
       if (data.error) {
           navigate('/login')
         } else {
@@ -32,7 +33,7 @@ const Feed = () => {
       return <h1>Chargement...</h1>
   }
 
-  console.log(feed)
+  // console.log(feed)
   return (
     <div>
       {feed.map(element => (

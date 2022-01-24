@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom'
 
 import Tweet from '../Components/Tweet';
 
 const TweetContent = (props) => {
-    const { id, name, username, userid, createdAt, text, numRetweets, numComments } = props
 
     return (
         <>
@@ -18,19 +17,7 @@ const TweetContent = (props) => {
                 </Link>
                 <h3>Tweet</h3>
             </div>
-            <Tweet>
-                
-            </Tweet>
-            <p>{name}</p>
-                {/* // key={element._id}
-                // id={element._id}
-                // userid={element.user._id}
-                name={props.name}
-                username={props.username}
-                createdAt={createdAt}
-                text={text}
-                numRetweets={numRetweets}
-                numComments={numComments} */}
+            <Tweet />
         </>
     );
 };

@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 
+import Tweet from './Tweet'
 import moment from "moment"
 import 'moment/locale/fr'
 import "../Styles/Components/ProfileContent.css"
-import Tweet from './Tweet'
 
 import { UserContext } from '../Context/UserContext'
 import { ModalContext } from '../Context/ModalContext'

@@ -22,7 +22,11 @@ const customStyles = {
       position: 'absolute'
     }
   }
-
+const Xbutton = {
+    content: {
+        display: 'block',
+    }
+}
 const ModalComponent = () => {
     const { modalType, visible, setVisible } = useContext(ModalContext)
 
@@ -45,7 +49,7 @@ const ModalComponent = () => {
                 <button
                     type="button"
                     onClick={handleModal}
-                    style={{position: "absolute"}}
+                    style={Xbutton}
                 >
                     X
                 </button>

@@ -88,7 +88,7 @@ const UserCard = (props) => {
             style={{width:'75px', fontSize:'13px'}}
             onClick={() => handleUnFollowings(id)}
           >
-            unSuivre
+            Ne pas suivre
           </button>
           :
           <button

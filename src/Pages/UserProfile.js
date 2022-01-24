@@ -8,10 +8,10 @@ const UserProfile = () => {
     return (
         <>
             <div className='row'>
-                <div className='col-3 p-5 border-end'>
+                <div className='col-3 border-end p-4 d-flex flex-column'>
                     <Menu />
                 </div>
-                <div className='col-6 p-0'>
+                <div className='col-6'>
                     <ProfileContent />
                 </div>
                 <div className='col-3 p-4 border-start'>

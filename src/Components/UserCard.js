@@ -52,6 +52,7 @@ const UserCard = (props) => {
     })
   }
 
+  // console.log(user.followings)
   return (
     <>
       <div className="mb-4 d-flex flex-row justify-content-between align-items-center">
@@ -79,15 +80,29 @@ const UserCard = (props) => {
               @{username}
             </h6>
           </div>
+<<<<<<< HEAD
         <div >
         {user.followings.includes(id) ? 
+=======
+<<<<<<< HEAD
+        </div>
+        <div>
+=======
+        <div >
+        {user.followings.includes(id) ? 
+>>>>>>> 3aa2bdbde93da90372aebd4560c45c193a7ddde5
+>>>>>>> main
           <button
           type='button'
             className='btn rounded-pill btn-dark fw-bold'
             style={{width:'75px', fontSize:'13px'}}
             onClick={() => handleUnFollowings(id)}
           >
+<<<<<<< HEAD
             unSuivre
+=======
+            Ne pas suivre
+>>>>>>> main
           </button>
           :
           <button

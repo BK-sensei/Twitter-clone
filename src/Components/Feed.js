@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from 'react'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Tweet from '../Components/Tweet'
 import { FeedContext } from '../Context/FeedContext'
@@ -37,21 +37,6 @@ const Feed = () => {
   return (
     <div>
       {feed.map(element => (
-<<<<<<< HEAD
-        <Link to={`/tweet/${element._id}`}>
-          <Tweet 
-              key={element._id}
-              id={element._id}
-              userid={element.user._id}
-              name={element.user.name}
-              username={element.user.username}
-              createdAt={element.createdAt}
-              text={element.text}
-              numRetweets={element.retweets.length}
-              numComments={element.comments.length}
-          />
-        </Link>
-=======
         <Tweet 
             key={element._id}
             id={element._id}
@@ -64,7 +49,6 @@ const Feed = () => {
             numComments={element.comments.length}
             retweets={element.retweets}
         />
->>>>>>> 3aa2bdbde93da90372aebd4560c45c193a7ddde5
       ))}
     </div>
   )

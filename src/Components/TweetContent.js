@@ -1,14 +1,44 @@
-import React from 'react';
-import { Link } from 'react-router-dom'
-
-import Tweet from '../Components/Tweet';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom'
+import SingleTweet from './SingleTweet';
 
 const TweetContent = (props) => {
-    const { id, name, username, userid, createdAt, text, numRetweets, numComments } = props
+    const { id } = props
+    const [ tweet, setTweet ] = useState(null)
+    const [ comments, setComments ] = useState([])
+
+    // Récupérer tous les commentaires d'un tweet selon son id 
+    const getComments = async () => {
+        const response = await fetch(`http://localhost:5000/comments/${id}`, {
+            credentials: 'include'
+        })
+        const data = await response.json()
+        setComments(data)
+    }
+
+    useEffect(() => {
+        getTweet()
+        getComments()
+    }, [])
+
+    // Récupérer un Tweet selon son id
+    const getTweet = async () => {
+        const response = await fetch(`http://localhost:5000/tweets/${id}`, {
+            credentials: 'include'
+        })
+        const data = await response.json()
+        setTweet(data)
+    }
+
+    if (!tweet && !comments) {
+        return <h1>Chargement</h1>
+    }
+
+    console.log("tweet",tweet);
 
     return (
-        <>
-            <div className='topTweet d-flex align-items-center pe-3 ps-3'>
+        <div className='d-flex flex-column'>
+            <div className='topTweet d-flex flex-row align-items-center pe-3 ps-3'>
                 <Link to="/home">
                     <div className='rounded-circle div-arrow'>
                         <svg fill="black" className='arrow'>
@@ -18,20 +48,29 @@ const TweetContent = (props) => {
                 </Link>
                 <h3>Tweet</h3>
             </div>
-            <Tweet>
-                
-            </Tweet>
-            <p>{name}</p>
-                {/* // key={element._id}
-                // id={element._id}
-                // userid={element.user._id}
-                name={props.name}
-                username={props.username}
-                createdAt={createdAt}
-                text={text}
-                numRetweets={numRetweets}
-                numComments={numComments} */}
-        </>
+            <div>
+                {tweet && 
+                <SingleTweet
+                    key={tweet._id}
+                    id={tweet._id}
+                    userid={tweet.user._id}
+                    name={tweet.user.name}
+                    username={tweet.user.username}
+                    createdAt={tweet.createdAt}
+                    text={tweet.text}
+                    numRetweets={tweet.retweets.length}
+                    numComments={tweet.comments.length}
+                    retweets={tweet.retweets}
+                />
+                }
+            </div>
+            <div>
+                {comments.map(comment => {
+                    <p>{comment.text}</p>
+                })}
+
+            </div>
+        </div>
     );
 };
 

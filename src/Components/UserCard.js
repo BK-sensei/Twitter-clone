@@ -80,13 +80,8 @@ const UserCard = (props) => {
               @{username}
             </h6>
           </div>
-<<<<<<< HEAD
-        </div>
-        <div>
-=======
         <div >
         {user.followings.includes(id) ? 
->>>>>>> 3aa2bdbde93da90372aebd4560c45c193a7ddde5
           <button
           type='button'
             className='btn rounded-pill btn-dark fw-bold'

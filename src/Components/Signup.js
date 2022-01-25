@@ -34,11 +34,11 @@ const Signup = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: "bob",
-      username: "bobby",
-      password: "bobbybobby",
-      passwordConfirmation: "bobbybobby",
-      email: "bobby@bobby.bobby",
+      name: "",
+      username: "",
+      password: "",
+      passwordConfirmation: "",
+      email: "",
       birthday: date
     },
     onSubmit: values => {
